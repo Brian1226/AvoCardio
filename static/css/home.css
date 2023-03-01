@@ -1,0 +1,17 @@
+.logo {
+    width: 100px;
+    height: 50px;
+}
+
+.green-btn {
+    color: white;
+    background-color: #6C9E4F;
+    width: 125px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+}
+
+#green-font {
+    color: #6C9E4F
+}

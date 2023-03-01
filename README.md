@@ -1,2 +1,2 @@
 # AvoCardio
-![](/avocardio.jpg)
+![](/avocardio.png)
