@@ -12,6 +12,18 @@
     border-radius: 30px;
 }
 
-#green-font {
+.green-font {
     color: #6C9E4F
+}
+
+.orange-font {
+    color: #D77456;
+}
+
+.linen-bg {
+    background-color: #F2E6DD;
+}
+
+.card-icon {
+    width: 50%;
 }
