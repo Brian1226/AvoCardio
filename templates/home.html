@@ -15,9 +15,9 @@
 <body>
     <!--navbar-->
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-        <div class="container">
+        <div class="container-lg">
             <a href="#">
-                <img src="../static/logo.png" class="logo" alt="logo" src="#">
+                <img src="../static/logo.png" class="logo" alt="logo">
             </a>
             <!--hamburger menu-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navlist"
@@ -27,14 +27,14 @@
             <!--nav list-->
             <div class="collapse navbar-collapse" id="navlist">
                 <div class="navbar-nav ms-3">
-                    <a class="nav-link me-3" href="#"></i>Recipes</a>
-                    <a class="nav-link me-3" href="#"></i>Ingredients</a>
-                    <a class="nav-link me-3" href="#"></i>Meal Planner</a>
+                    <a class="nav-link me-3 links" href="#"></i>Recipes</a>
+                    <a class="nav-link me-3 links" href="#"></i>Ingredients</a>
+                    <a class="nav-link me-3 links" href="#"></i>Meal Planner</a>
                 </div>
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link ms-3" href="#"></i>About</a>
-                    <a class="nav-link ms-3" href="#"></i>Contact</a>
-                    <a class="nav-link ms-3" href="#"></i>Login</a>
+                    <a class="nav-link ms-3 links" href="#"></i>About</a>
+                    <a class="nav-link ms-3 links" href="#"></i>Contact</a>
+                    <a class="nav-link ms-3 links" href="#"></i>Login</a>
                 </div>
                 <button class="green-btn ms-3">Sign Up</button>
             </div>
@@ -72,7 +72,7 @@
         </div>
         <div class="row justify-content-center mb-5 g-3">
             <div class="col-md">
-                <div class="card border">
+                <div class="card border card-shadow">
                     <div class="card-body">
                         <div class="card-title text-center orange-font">
                             <h3>Recipes</h3>
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col-md">
-                <div class="card border">
+                <div class="card border card-shadow">
                     <div class="card-body">
                         <div class="card-title text-center orange-font">
                             <h3>Ingredients</h3>
@@ -102,7 +102,7 @@
             </div>
 
             <div class="col-md">
-                <div class="card border">
+                <div class="card border card-shadow">
                     <div class="card-body">
                         <div class="card-title text-center orange-font">
                             <h3>Meal Planner</h3>
@@ -119,28 +119,74 @@
     </div>
 
 
-    <!--articles & videos section-->
-    <div class="container-sm">
+    <!--articles section-->
+    <div class="container-sm mb-5" id="articles-section">
         <div class="text-center mb-3 green-font">
             <h2>Lorem, ipsum</h2>
         </div>
-        <div class="card mb-3">
+        <div class="card mb-3 card-shadow">
             <div class="row g-0">
                 <div class="col-lg-4 col-md-6">
-                    <img src="#" alt="" class="img-fluid">
-                    <h3>IMAGE</h3>
+                    <img src="../static/healthysnacks.jpg"
+                        alt="https://www.freepik.com/free-photo/high-angle-view-healthy-breakfast_2667092.htm#query=healthy%20snacks&position=9&from_view=search&track=robertav1"
+                        class="img-fluid">
                 </div>
                 <div class="card-body col-lg-8 col-md-6 d-flex flex-column">
-                    <h5 class="card-title mb-3">Article title</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus accusantium eveniet eos similique cupiditate ut, illum harum sint est voluptatibus magnam reprehenderit minus? Facilis deserunt iste nisi temporibus perspiciatis deleniti.</p>
-                    <p class="card-text mt-auto">Link here</p>
+                    <h5 class="card-title mb-3 orange-font">Article title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
+                        accusantium
+                        eveniet eos similique cupiditate ut, illum harum sint est voluptatibus magnam reprehenderit
+                        minus? Facilis deserunt iste nisi temporibus perspiciatis deleniti.</p>
+                    <a class="card-text mt-auto links">Link here</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-3 card-shadow">
+            <div class="row g-0">
+                <div class="col-lg-4 col-md-6">
+                    <img src="../static/healthysnacks.jpg"
+                        alt="https://www.freepik.com/free-photo/high-angle-view-healthy-breakfast_2667092.htm#query=healthy%20snacks&position=9&from_view=search&track=robertav1"
+                        class="img-fluid">
+                </div>
+                <div class="card-body col-lg-8 col-md-6 d-flex flex-column">
+                    <h5 class="card-title mb-3 orange-font">Article title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
+                        accusantium
+                        eveniet eos similique cupiditate ut, illum harum sint est voluptatibus magnam reprehenderit
+                        minus? Facilis deserunt iste nisi temporibus perspiciatis deleniti.</p>
+                    <a class="card-text mt-auto links">Link here</a>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <!--footer section-->
+    <div class="container-fluid bg-dark" id="footer-section">
+        <div class="flex flex-column">
+            <div class="d-flex flex-row justify-content-around pt-3">
+                <div class="d-flex flex-row my-auto">
+                    <a class="me-3 links" href="#"></i>Link</a>
+                    <a class="me-3 links" href="#"></i>Link</a>
+                </div>
+                <div class="d-flex flex-row">
+                    <a href="#">
+                        <img src="../static/logo.png" class="logo" alt="logo">
+                    </a>
+                </div>
+                <div class="d-flex flex-row my-auto">
+                    <a class="ms-3 links" href="#"></i>Link</a>
+                    <a class="ms-3 links" href="#"></i>Link</a>
+                </div>
+            </div>
+            <hr>
+            <p>&copy; 2023</p>
+        </div>
+    </div>
 
+
+    <!--JS bundle to make certain Bootstrap components function-->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>

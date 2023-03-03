@@ -4,12 +4,19 @@
 }
 
 .green-btn {
-    color: white;
-    background-color: #6C9E4F;
+    color: #6C9E4F;
+    background-color: inherit;
+    font-weight: bold;
     width: 125px;
     height: 40px;
-    border: none;
+    border: 2px solid #6C9E4F;
     border-radius: 30px;
+}
+
+.green-btn:hover {
+    color: #FFFFFF;
+    background-color: #6C9E4F;
+    box-shadow: 0px 0px 10px #6C9E4F;
 }
 
 .green-font {
@@ -26,4 +33,38 @@
 
 .card-icon {
     width: 50%;
+}
+
+.card-shadow {
+    box-shadow: 3px 3px 10px 1px #000000;
+}
+
+.links {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.links:hover {
+    color: #6C9E4F;
+    text-decoration: underline;
+}
+
+#articles-section .links {
+    color: #6C9E4F;
+    text-decoration: none;
+}
+
+#articles-section .links:hover {
+    text-decoration: underline;
+}
+
+#footer-section hr {
+    color: #6C9E4F;
+}
+
+#footer-section p {
+    color: #FFFFFF;
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 15px;
 }
