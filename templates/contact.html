@@ -26,10 +26,12 @@
             </form>
         </div>
         <div class="col-lg-6">
-            <img src="../static/hero-img.jpg" class="img-fluid"
+            <img src="{{ url_for('static', filename='../static/hero-img.jpg') }}" class="img-fluid"
                 alt="https://www.freepik.com/free-vector/food-nutritional-quality-illustration_18611142.htm#query=meal%20plan&position=31&from_view=search&track=robertav1">
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/css/forms.css') }}">
 
 {% endblock %}
