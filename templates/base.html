@@ -14,17 +14,19 @@
 </head>
 
 <body>
-    <!--navbar-->
+    <!--navbar section-->
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <div class="container-lg">
             <a href="{{ url_for('home') }}">
                 <img src="{{ url_for('static', filename='/images/logo.png') }}" class="logo" alt="https://images.fineartamerica.com/images/artworkimages/medium/3/avo-cardio-fitness-avocado-mister-tee-transparent.png">
             </a>
+
             <!--hamburger menu-->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navlist"
                 aria-controls="navlist" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <!--nav list-->
             <div class="collapse navbar-collapse" id="navlist">
                 <div class="navbar-nav ms-3">
