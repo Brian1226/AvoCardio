@@ -15,7 +15,7 @@
     <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
         <div class="row col-xl-4 col-lg-5 col-md-6">
             <div class="card py-5 px-5">
-                <img src="{{ url_for('static', filename='../static/logo.png') }}" class="card-img-top logo" alt="https://images.fineartamerica.com/images/artworkimages/medium/3/avo-cardio-fitness-avocado-mister-tee-transparent.png">
+                <img src="{{ url_for('static', filename='/images/logo.png') }}" class="card-img-top logo" alt="https://images.fineartamerica.com/images/artworkimages/medium/3/avo-cardio-fitness-avocado-mister-tee-transparent.png">
                 <form method="POST">
                     {{ form.hidden_tag() }}
                     {{ form.email.label }}
