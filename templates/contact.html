@@ -2,12 +2,16 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/css/contact.css') }}">
+
+<!--popup message when message is successfully sent-->
 {% for message in get_flashed_messages() %}
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     {{ message }}
 </div>
 {% endfor %}
+
 
 <!--contact section-->
 <div class="container-lg mb-5">
@@ -17,7 +21,7 @@
             <form method="POST">
                 {{ form.hidden_tag() }}
                 {{ form.email.label }}
-                {{ form.email(class="col-12 mb-3 p-2 field") }}
+                {{ form.email(class="col-12 mb-3 p-2") }}
                 {{ form.name.label }}
                 {{ form.name(class="col-12 mb-3 p-2") }}
                 {{ form.message.label }}
@@ -31,7 +35,5 @@
         </div>
     </div>
 </div>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='../static/css/forms.css') }}">
 
 {% endblock %}
