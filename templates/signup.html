@@ -27,10 +27,10 @@
                     {{ form.email(class="col-12 mb-3 p-2") }}
                     {{ form.password.label }}
                     {{ form.password(class="col-12 mb-3 p-2") }}
-                    {{ form.login(class="green-btn my-2") }}
+                    {{ form.signup(class="green-btn my-2") }}
                     <hr>
                 </form>
-                <p>Don't have an account? <a href="{{ url_for('signup') }}" class="link my-2">Click Here</a></p>
+                <p>Already have an account? <a href="{{ url_for('login') }}" class="link my-2">Click Here</a></p>
             </div>
         </div>
     </div>

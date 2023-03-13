@@ -12,4 +12,8 @@ class loginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter your email", "type": "email"})
     password = PasswordField("Password", validators=[DataRequired()], render_kw={"placeholder": "Enter your password"})
     login = SubmitField("Log In")
+
+class signupForm(FlaskForm):
+    email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter your email", "type": "email"})
+    password = PasswordField("Password", validators=[DataRequired()], render_kw={"placeholder": "Enter your password"})
     signup = SubmitField("Sign Up")
