@@ -3,7 +3,11 @@
 
 ## Description
 
-By: 
+By: Sarah Fong (SarahFongHacks), Justin Goodman (Jgoody4), Thomas Ng (hicbag), Brian Nguyen (Brian1226)
+
+Problem Statement
+
+Solution
 
 ### Technologies used
 - Python
@@ -11,12 +15,13 @@ By:
 - Flask
 - Bootstrap5
 
-## Deployment:  
+### Deployment:  
 
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
+- [License](#license)
 
 ## Installation
 
@@ -44,3 +49,7 @@ python3 main.py
 ## Usage
 
 ## Credits
+
+## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
