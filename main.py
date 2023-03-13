@@ -24,9 +24,14 @@ def signup():
         return redirect(url_for("home"))
     return render_template("signup.html", form=form)
 
+@app.route("/about")
+def about():
+    title = "About Us"
+    return render_template("about.html", title=title)
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    title = "Contact"
+    title = "Contact Us"
     form = contactForm()
     if form.validate_on_submit():
         flash("THANKS FOR CONTACTING US!")
