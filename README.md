@@ -1,5 +1,5 @@
 # AvoCardio
-![](/avocardio.png)
+![](/avocardio-logo.png)
 
 ## Description
 
