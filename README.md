@@ -12,10 +12,10 @@ TBD
 TBD
 
 ### Technologies used
-- Python3
+- Python 3
 - HTML5/CSS3
 - Flask
-- Bootstrap5
+- Bootstrap 5
 
 ### Deployment
 TBD
@@ -67,6 +67,9 @@ TBD
 - [Hero Image by vectorjuice](https://www.freepik.com/free-vector/food-nutritional-quality-illustration_18611142.htm#query=meal%20plan&position=31&from_view=search&track=robertav1)
 - [Healthy Food Article Image by Freepik](https://www.freepik.com/free-photo/high-angle-view-healthy-breakfast_2667092.htm#query=healthy%20snacks&position=9&from_view=search&track=robertav1)
 - [Exercise Article Image by jcomp](https://www.freepik.com/free-photo/close-up-shoes-female-runner-tying-her-shoes-jogging-exercise_2887337.htm#query=running&position=6&from_view=search&track=sph)
+
+### API
+- TBD
 
 ## License
 
