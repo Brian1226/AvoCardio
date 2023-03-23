@@ -11,11 +11,13 @@ TBD
 ### Solution
 TBD
 
-### Technologies used
-- Python 3
-- HTML5/CSS3
-- Flask
-- Bootstrap 5
+### Technologies Used
+- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+- ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+- ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+- ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+- ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+- ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 ### Deployment
 TBD
@@ -71,6 +73,9 @@ TBD
 ### API
 - TBD
 
-## License
+### Markdown Badges
+- [Technologies Used](https://github.com/Ileriayo/markdown-badges)
+- [License](https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba)
 
+## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
