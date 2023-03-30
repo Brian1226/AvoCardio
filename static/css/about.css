@@ -58,6 +58,12 @@
     text-decoration: underline;
 }
 
+.gradient-bg {
+    background: linear-gradient(45deg, #6C9E4F 25%, #B5E44D 75%);
+    color: white;
+    text-align: center;
+}
+
 #footer-section hr {
     border: 5px solid #6C9E4F;
 }
