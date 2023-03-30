@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, flash
 from forms import contact_form, login_form, signup_form
 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ def signup():
 @app.route("/about")
 def about():
     title = "About Us"
-    css_file = "base.css"
+    css_file = "about.css"
     return render_template("about.html", title=title, css_file=css_file)
 
 @app.route("/contact", methods=["GET", "POST"])

@@ -2,11 +2,90 @@
 
 {% block content %}
 
-<!--about section-->
-<div class="container-xs mb-5">
+<!--mission & vision statements section-->
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12 py-5 px-5 linen-bg">
-            <h1 class="hero-header mb-5 green-font">Lorem, ipsum dolor.</h1>
+        <div class="col-lg-12 py-5 gradient-bg">
+            <h1 class="py-5">Lorem, ipsum dolor.</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+        </div>
+    </div>
+</div>
+
+
+<!--story section-->
+<div class="container-sm">
+    <div class="row">
+        <div class="col-12 py-5">
+            <h2 class="text-center my-5">Our Story</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet eos sequi similique architecto, iusto
+                repellat cumque totam rerum voluptatem illum unde est consectetur saepe laboriosam nesciunt, veritatis
+                harum quidem corrupti ab officia praesentium magni? Nam incidunt consequatur dolor aut distinctio
+                corrupti odit sequi nesciunt nemo error officia repellat aliquid iste aspernatur veniam labore mollitia
+                fugiat, quos ex optio maxime beatae adipisci? Facilis enim vel dolor nemo veritatis modi inventore
+                repudiandae quae eaque laudantium. Iste, atque.</p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet eos sequi similique architecto, iusto
+                repellat cumque totam rerum voluptatem illum unde est consectetur saepe laboriosam nesciunt, veritatis
+                harum quidem corrupti ab officia praesentium magni? Nam incidunt consequatur dolor aut distinctio
+                corrupti odit sequi nesciunt nemo error officia repellat aliquid iste aspernatur veniam labore mollitia
+                fugiat, quos ex optio maxime beatae adipisci? Facilis enim vel dolor nemo veritatis modi inventore
+                repudiandae quae eaque laudantium. Iste, atque.</p>
+        </div>
+    </div>
+</div>
+
+
+<!--meet our team section-->
+<div class="container-sm">
+    <div class="row">
+        <div class="col-lg-12 my-5">
+            <h2 class="text-center">Meet our Team</h2>
+        </div>
+    </div>
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 mb-5">
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static', filename='../static/images/profile.png') }}" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Sarah Fong</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia commodi
+                        numquam quaerat vitae enim esse consequuntur necessitatibus fugiat in iure.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static', filename='../static/images/profile.png') }}" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Justin Goodman</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia commodi
+                        numquam quaerat vitae enim esse consequuntur necessitatibus fugiat in iure.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static', filename='../static/images/profile.png') }}" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Thomas Ng</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia commodi
+                        numquam quaerat vitae enim esse consequuntur necessitatibus fugiat in iure.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <img src="{{ url_for('static', filename='../static/images/profile.png') }}" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Brian Nguyen</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia commodi
+                        numquam quaerat vitae enim esse consequuntur necessitatibus fugiat in iure.</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
