@@ -8,7 +8,8 @@ app.config["SECRET_KEY"] = "mykey"
 @app.route("/")
 def home():
     title = "Home"
-    return render_template("home.html", title=title)
+    css_file = "base.css"
+    return render_template("home.html", title=title, css_file=css_file)
 
 @app.route("/login")
 def login():
@@ -27,16 +28,18 @@ def signup():
 @app.route("/about")
 def about():
     title = "About Us"
-    return render_template("about.html", title=title)
+    css_file = "base.css"
+    return render_template("about.html", title=title, css_file=css_file)
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     title = "Contact Us"
+    css_file = "contact.css"
     form = contact_form()
     if form.validate_on_submit():
         flash("THANKS FOR CONTACTING US!")
         return redirect(url_for("contact"))
-    return render_template("contact.html", form=form, title=title)
+    return render_template("contact.html", form=form, title=title, css_file=css_file)
 
 if __name__ == "__main__":
     app.run(debug=True)
