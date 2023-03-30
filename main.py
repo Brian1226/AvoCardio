@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, url_for, flash
-from forms import contactForm, loginForm, signupForm
+from forms import contact_form, login_form, signup_form
 
 app = Flask(__name__)
 
@@ -12,14 +12,14 @@ def home():
 
 @app.route("/login")
 def login():
-    form = loginForm()
+    form = login_form()
     if form.validate_on_submit():
         return redirect(url_for("home"))
     return render_template("login.html", form=form)
 
 @app.route("/signup")
 def signup():
-    form = signupForm()
+    form = signup_form()
     if form.validate_on_submit():
         return redirect(url_for("home"))
     return render_template("signup.html", form=form)
@@ -32,7 +32,7 @@ def about():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     title = "Contact Us"
-    form = contactForm()
+    form = contact_form()
     if form.validate_on_submit():
         flash("THANKS FOR CONTACTING US!")
         return redirect(url_for("contact"))
