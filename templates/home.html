@@ -5,8 +5,8 @@
 <!--hero section-->
 <div class="container-lg mb-5">
     <div class="row">
-        <div class="col-lg-6 py-5 px-5 linen-bg">
-            <h1 class="mb-5 green-font">Lorem, ipsum dolor.</h1>
+        <div class="col-lg-7 py-5 px-5 linen-bg">
+            <h1 class="mb-5 green-font">Welcome to Avocardio!</h1>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, sint dolores
                 aperiam ducimus cumque eos soluta vitae porro ad maiores quisquam nobis facilis quibusdam!
                 Laboriosam expedita repellat, quos id voluptate voluptatum esse? Ab tenetur facere recusandae
@@ -15,9 +15,9 @@
                 voluptate amet nihil sequi, quae eius distinctio velit vel laudantium cupiditate repudiandae
                 aliquid praesentium laborum similique animi saepe culpa ipsam eligendi, repellat veniam? Nulla
                 laboriosam deserunt perferendis dolorum eum.</p>
-            <button class="green-btn mt-3">Learn More</button>
+            <a class="signup-btn" href = "{{url_for('signup')}}">Sign Up Now</a>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <img src="{{ url_for('static', filename='/images/hero-img.jpg') }}" class="img-fluid" alt="hero image">
         </div>
     </div>
@@ -38,9 +38,8 @@
                         <img src="{{ url_for('static', filename='/images/recipes-icon.png') }}" alt="recipes icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, magni nam
-                        possimus voluptatum illo iusto asperiores omnis, animi, eligendi fuga doloribus odit ea
-                        veniam id quod? Dicta natus eligendi mollitia?</p>
+                    <p class="card-text">With the ingredients you have, we can help provide recipes that maximize the most out of your groceries!
+                    </p>
                 </div>
             </div>
         </div>
@@ -68,9 +67,8 @@
                         <img src="{{ url_for('static', filename='/images/mealplan-icon.png') }}" alt="meal plan icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, magni nam
-                        possimus voluptatum illo iusto asperiores omnis, animi, eligendi fuga doloribus odit ea
-                        veniam id quod? Dicta natus eligendi mollitia?</p>
+                    <p class="card-text">Don't have time to plan out meals for the week?
+                        We can provide a plan that suits everyone based on the ingredients you have!</p>
                 </div>
             </div>
         </div>

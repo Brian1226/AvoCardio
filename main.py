@@ -1,9 +1,32 @@
+import os
 from flask import Flask, render_template, redirect, url_for, flash
 from forms import contact_form, login_form, signup_form
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
+path = os.path.abspath(os.getcwd()+"/database/database.db")
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "mykey"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+path
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+login_manager  = LoginManager(app)
+db = SQLAlchemy(app)
+
+@app.before_first_request
+def create_tables(): 
+    db.create_all()
+
+
+@login_manager.user_loader
+def load_user(user_id): 
+    return User.get(user_id)
+
+@login_manager.unauthorized_handler
+def unauthorized(): 
+    return redirect(url_for('signup'))
+
 
 @app.route("/")
 def home():
