@@ -2,7 +2,9 @@ import os
 from flask import Flask, render_template, redirect, url_for, flash
 from forms import contact_form, login_form, signup_form
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, login_user, logout_user, current_user, login_required
+import bcrypt
+from models import User
 
 path = os.path.abspath(os.getcwd()+"/database/database.db")
 app = Flask(__name__)
@@ -38,8 +40,19 @@ def home():
 def login():
     form = login_form()
     if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data.first())
+        if user and bcrypt.check_password_hash(user.password, form.password.data): 
+            login_user(user)
+            flash(f'Login successful')
+        else: 
+            flash(f'Login failed')
         return redirect(url_for("home"))
     return render_template("login.html", form=form)
+
+@app.route("/logout")
+def logout(): 
+    logout_user()
+    return redirect(url_for("login"))
 
 @app.route("/signup")
 def signup():
