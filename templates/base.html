@@ -36,10 +36,10 @@
             <!--nav list-->
             <div class="collapse navbar-collapse" id="navlist">
                 <div class="navbar-nav ms-3">
-                    <a class="nav-link me-3 links" href="#"></i>Recipes</a>
-                    <a class="nav-link me-3 links" href="#"></i>Ingredients</a>
-                    <a class="nav-link me-3 links" href="#"></i>Meal Planner</a>
-                    <a class="nav-link me-3 links" href="#"></i>Shopping List</a>
+                    <a class="nav-link me-3 links" href="{{ url_for('recipes') }}"></i>Recipes</a>
+                    <a class="nav-link me-3 links" href="{{ url_for('ingredients') }}"></i>Ingredients</a>
+                    <a class="nav-link me-3 links" href="{{ url_for('meal') }}"></i>Meal Planner</a>
+                    <a class="nav-link me-3 links" href="{{ url_for('shopping') }}"></i>Shopping List</a>
                 </div>
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link ms-3 links" href="{{ url_for('about') }}"></i>About</a>

@@ -3,8 +3,8 @@ from flask import Flask, render_template, redirect, url_for, flash
 from forms import contact_form, login_form, signup_form
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-import bcrypt
-from models import User
+from flask_bcrypt import Bcrypt
+# from models import User
 
 path = os.path.abspath(os.getcwd()+"/database/database.db")
 app = Flask(__name__)
@@ -15,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 login_manager  = LoginManager(app)
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 @app.before_first_request
 def create_tables(): 
@@ -76,6 +77,30 @@ def contact():
         flash("THANKS FOR CONTACTING US!")
         return redirect(url_for("contact"))
     return render_template("contact.html", form=form, title=title, css_file=css_file)
+
+@app.route("/recipe")
+def recipes():
+    title = "Recipes"
+    css_file = "recipes.css"
+    return render_template("recipes.html", title = title, css_file = css_file)
+
+@app.route('/ingredients')
+def ingredients(): 
+    title = "Ingredients"
+    css_file = "ingredients.css"
+    return render_template("ingredients.html", title = title, css_file = css_file)
+
+@app.route('/meal')
+def meal(): 
+    title = "Meals"
+    css_file = "meal.css"
+    return render_template("meal.html", title = title, css_file = css_file)
+
+@app.route('/shopping')
+def shopping(): 
+    title = "Shopping"
+    css_file = "shopping.css"
+    return render_template("shopping.html", title = title, css_file = css_file)
 
 if __name__ == "__main__":
     app.run(debug=True)
