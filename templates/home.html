@@ -5,19 +5,17 @@
 <!--hero section-->
 <div class="container-lg mb-5">
     <div class="row">
-        <div class="col-lg-6 py-5 px-5 linen-bg">
-            <h1 class="mb-5 green-font">Lorem, ipsum dolor.</h1>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, sint dolores
-                aperiam ducimus cumque eos soluta vitae porro ad maiores quisquam nobis facilis quibusdam!
-                Laboriosam expedita repellat, quos id voluptate voluptatum esse? Ab tenetur facere recusandae
-                explicabo repellat! Quo, repellendus!</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum deserunt, esse
-                voluptate amet nihil sequi, quae eius distinctio velit vel laudantium cupiditate repudiandae
-                aliquid praesentium laborum similique animi saepe culpa ipsam eligendi, repellat veniam? Nulla
-                laboriosam deserunt perferendis dolorum eum.</p>
-            <button class="green-btn mt-3">Learn More</button>
+        <div class="col-lg-7 py-5 px-5 linen-bg">
+            <h1 class="mb-5 green-font">Welcome to Avocardio!</h1>
+            <p>
+                This application is designed to help all people be able to make healthy and nutritious meals based on their own diet
+                or restrictions! Physical health and mental health are so closely tied together that we want to make sure that people 
+                can eat healthy!
+            </p>
+            <br>
+            <a class="signup-btn" href = "{{url_for('signup')}}">Sign Up Now</a>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             <img src="{{ url_for('static', filename='/images/hero-img.jpg') }}" class="img-fluid" alt="hero image">
         </div>
     </div>
@@ -27,7 +25,7 @@
 <!--cards section-->
 <div class="container-sm">
     <div class="text-center my-5 green-font">
-        <h2>Lorem, ipsum</h2>
+        <h2>How we help!</h2>
     </div>
     <div class="row justify-content-center g-3">
         <div class="col-md">
@@ -38,9 +36,9 @@
                         <img src="{{ url_for('static', filename='/images/recipes-icon.png') }}" alt="recipes icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, magni nam
-                        possimus voluptatum illo iusto asperiores omnis, animi, eligendi fuga doloribus odit ea
-                        veniam id quod? Dicta natus eligendi mollitia?</p>
+                    <p class="card-text">This application will provide you the recipes that maximize the most out of your groceries!
+                        There are no limits to what you can cook with the help of our application! We're looking to help better serve you!
+                    </p>
                 </div>
             </div>
         </div>
@@ -53,9 +51,8 @@
                         <img src="{{ url_for('static', filename='/images/ingredients-icon.png') }}"
                             alt="ingredients icon" class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, magni nam
-                        possimus voluptatum illo iusto asperiores omnis, animi, eligendi fuga doloribus odit ea
-                        veniam id quod? Dicta natus eligendi mollitia?</p>
+                    <p class="card-text">Any ingredients you have, we can work with! No matter your budget, no matter what culture you're from, 
+                        our application can and will help you develop healthy eating habits from the resources you have access to!</p>
                 </div>
             </div>
         </div>
@@ -68,9 +65,8 @@
                         <img src="{{ url_for('static', filename='/images/mealplan-icon.png') }}" alt="meal plan icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, magni nam
-                        possimus voluptatum illo iusto asperiores omnis, animi, eligendi fuga doloribus odit ea
-                        veniam id quod? Dicta natus eligendi mollitia?</p>
+                    <p class="card-text">Don't have time to plan out meals for the week?
+                        We can provide a plan that suits everyone with minimal effort on your part! Don't let your busy schedule change how healthy you eat!</p>
                 </div>
             </div>
         </div>
