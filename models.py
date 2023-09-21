@@ -24,6 +24,6 @@ class User(db.Model, UserMixin):
 
     def __repr__(self): 
         return f'{self.id}' \
-               f': {self.username} ' \
-               f': {self.email} ' \
-               f': {self.data_created.strftime("%d/%m/%Y, %H:%M:%S")}'
+            f': {self.username} ' \
+            f': {self.email} ' \
+            f': {self.data_created.strftime("%d/%m/%Y, %H:%M:%S")}'
