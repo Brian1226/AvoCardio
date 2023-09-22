@@ -9,7 +9,7 @@ from flask_bcrypt import Bcrypt
 path = os.path.abspath(os.getcwd()+"/database/database.db")
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "mykey"
+app.config["SECRET_KEY"] = "12cf392707648385ca40917f"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -37,11 +37,11 @@ def home():
     css_file = "base.css"
     return render_template("home.html", title=title, css_file=css_file)
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     form = login_form()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data.first())
+        user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data): 
             login_user(user)
             flash(f'Login successful')
