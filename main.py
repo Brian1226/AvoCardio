@@ -4,7 +4,6 @@ from forms import contact_form, login_form, signup_form
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
 from flask_bcrypt import Bcrypt
-# from models import User
 
 path = os.path.abspath(os.getcwd()+"/database/database.db")
 app = Flask(__name__)
@@ -23,7 +22,8 @@ def create_tables():
 
 
 @login_manager.user_loader
-def load_user(user_id): 
+def load_user(user_id):
+    from models import User
     return User.get(user_id)
 
 @login_manager.unauthorized_handler
@@ -39,6 +39,7 @@ def home():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    from models import User
     form = login_form()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
