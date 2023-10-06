@@ -1,9 +1,8 @@
-from flask import redirect, url_for
 from flask_login import UserMixin
 # from itsdangerous import TimedJSONWebSignatureSerializer as Serializer 
 
-from main import db, login_manager, app
-from datetime import datetime, date
+from database import db
+from datetime import datetime
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
