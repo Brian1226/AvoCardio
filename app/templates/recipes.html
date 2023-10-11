@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-sm">
+    <div class="text-center my-5 green-font">
+        <h3>Recipes</h3>
+    </div>
+    <div class = "container">
+        {% for ingredient in ingredients %}
+            <p>{{ingredient.name}}</p>
+        {% endfor %}
+    </div>
+    <div>
+        <br><br><br><br><br>
+    </div>
+</div>
+
+{% endblock %}
