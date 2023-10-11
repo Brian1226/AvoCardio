@@ -48,7 +48,7 @@ pip3 install -r requirements.txt
 
 Run the application
 ```bash
-python3 main.py
+python3 run.py
 ```
 
 ## Usage

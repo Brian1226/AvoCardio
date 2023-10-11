@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, add_ingredients
-from app.models import User, Ingredients
+from app.models import User, datetime, load_user, unauthorized, Ingredients
 
 @app.route("/")
 def home():
@@ -10,17 +10,19 @@ def home():
     css_file = "base.css"
     return render_template("home.html", title=title, css_file=css_file)
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     form = login_form()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data.first())
-        if user and bcrypt.check_password_hash(user.password, form.password.data): 
+        email = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and email and bcrypt.check_password_hash(user.password, form.password.data): 
             login_user(user)
-            flash(f'Login successful')
+            flash(f"Login successful")
+            return redirect(url_for("home"))
         else: 
-            flash(f'Login failed')
-        return redirect(url_for("home"))
+            flash(f"Login failed")
+            return redirect(url_for("login"))
     return render_template("login.html", form=form)
 
 @app.route("/logout")
@@ -28,11 +30,28 @@ def logout():
     logout_user()
     return redirect(url_for("login"))
 
-@app.route("/signup")
+@app.route("/signup", methods=['GET', 'POST'])
 def signup():
     form = signup_form()
     if form.validate_on_submit():
-        return redirect(url_for("home"))
+        existing_username = User.query.filter_by(username=form.username.data).first()
+        existing_email = User.query.filter_by(email=form.email.data).first()
+        if existing_email:
+            flash("Sign up failed. Email already exists.")
+            return redirect(url_for("signup"))
+        elif existing_username:
+            flash("Sign up failed. Username already exists.")
+            return redirect(url_for("signup"))
+        else:
+            user = User(
+                email=form.email.data, 
+                username=form.username.data, 
+                password=bcrypt.generate_password_hash(form.password.data).decode("utf-8"), 
+                date_created=datetime.utcnow())
+            db.session.add(user)
+            db.session.commit()
+            flash("Sign up successful")
+            return redirect(url_for("login"))
     return render_template("signup.html", form=form)
 
 @app.route("/about")
@@ -55,7 +74,8 @@ def contact():
 def recipes():
     title = "Recipes"
     css_file = "recipes.css"
-    user = User.query.filter_by(username=current_user.username().first())
+    # user = User.query.filter_by(username=current_user.username().first())
+    user = current_user
     ingredients = Ingredients.query.filter_by(user_id = user.id).all()
     return render_template("recipes.html", title = title, css_file = css_file, ingredients = ingredients)
 
