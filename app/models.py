@@ -7,7 +7,7 @@ from datetime import datetime, date
 
 @login_manager.user_loader
 def load_user(user_id): 
-    return User.get(user_id)
+    return User.query.get(user_id)
 
 @login_manager.unauthorized_handler
 def unauthorized(): 
@@ -32,9 +32,9 @@ class User(db.Model, UserMixin):
 
     def __repr__(self): 
         return f'{self.id}' \
-               f': {self.username} ' \
-               f': {self.email} ' \
-               f': {self.data_created.strftime("%d/%m/%Y, %H:%M:%S")}'
+            f': {self.username} ' \
+            f': {self.email} ' \
+            f': {self.data_created.strftime("%d/%m/%Y, %H:%M:%S")}'
     
 class Ingredients(db.Model): 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

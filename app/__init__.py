@@ -7,7 +7,7 @@ from flask_bcrypt import Bcrypt
 path = os.path.abspath(os.getcwd()+"/app/database/database.db")
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "mykey"
+app.config["SECRET_KEY"] = "12cf392707648385ca40917f"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+ path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
