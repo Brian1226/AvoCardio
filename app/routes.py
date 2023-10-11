@@ -4,14 +4,6 @@ from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, add_ingredients
 from app.models import User, Ingredients
 
-@login_manager.user_loader
-def load_user(user_id): 
-    return User.get(user_id)
-
-@login_manager.unauthorized_handler
-def unauthorized(): 
-    return redirect(url_for('signup'))
-
 @app.route("/")
 def home():
     title = "Home"

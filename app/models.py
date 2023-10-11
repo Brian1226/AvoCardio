@@ -5,6 +5,14 @@ from flask_login import UserMixin
 from app import db, login_manager, app
 from datetime import datetime, date
 
+@login_manager.user_loader
+def load_user(user_id): 
+    return User.get(user_id)
+
+@login_manager.unauthorized_handler
+def unauthorized(): 
+    return redirect(url_for('signup'))
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), unique=True, nullable = False)
