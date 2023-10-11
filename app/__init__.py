@@ -4,11 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 
-path = os.path.abspath(os.getcwd()+"/database/database.db")
+path = os.path.abspath(os.getcwd()+"/app/database/database.db")
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "mykey"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+ '/home/tng/AvoCardio/app/database/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+ path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 login_manager  = LoginManager(app)
