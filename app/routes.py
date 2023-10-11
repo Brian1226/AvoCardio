@@ -1,26 +1,8 @@
-import os
-from flask import Flask, render_template, redirect, url_for, flash
-from forms import contact_form, login_form, signup_form
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_user, logout_user, current_user, login_required
-from flask_bcrypt import Bcrypt
-# from models import User
-
-path = os.path.abspath(os.getcwd()+"/database/database.db")
-app = Flask(__name__)
-
-app.config["SECRET_KEY"] = "mykey"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+path
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-login_manager  = LoginManager(app)
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
-
-@app.before_first_request
-def create_tables(): 
-    db.create_all()
-
+from flask import render_template, url_for, redirect, flash 
+from flask_login import login_user, logout_user, current_user, login_required
+from app import app, db, bcrypt, login_manager
+from app.forms import contact_form, login_form, signup_form, add_ingredients
+from app.models import User, Ingredients
 
 @login_manager.user_loader
 def load_user(user_id): 
@@ -29,7 +11,6 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized(): 
     return redirect(url_for('signup'))
-
 
 @app.route("/")
 def home():
@@ -82,7 +63,9 @@ def contact():
 def recipes():
     title = "Recipes"
     css_file = "recipes.css"
-    return render_template("recipes.html", title = title, css_file = css_file)
+    user = User.query.filter_by(username=current_user.username().first())
+    ingredients = Ingredients.query.filter_by(user_id = user.id).all()
+    return render_template("recipes.html", title = title, css_file = css_file, ingredients = ingredients)
 
 @app.route('/ingredients')
 def ingredients(): 
@@ -101,6 +84,3 @@ def shopping():
     title = "Shopping"
     css_file = "shopping.css"
     return render_template("shopping.html", title = title, css_file = css_file)
-
-if __name__ == "__main__":
-    app.run(debug=True)
