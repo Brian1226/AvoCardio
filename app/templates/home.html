@@ -2,18 +2,28 @@
 
 {% block content %}
 
+<!--popup message when sign up / log in is successful or not-->
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {{ message }}
+</div>
+{% endfor %}
+
 <!--hero section-->
 <div class="container-lg mb-5">
     <div class="row">
         <div class="col-lg-7 py-5 px-5 linen-bg">
             <h1 class="mb-5 green-font">Welcome to Avocardio!</h1>
             <p>
-                This application is designed to help all people be able to make healthy and nutritious meals based on their own diet
-                or restrictions! Physical health and mental health are so closely tied together that we want to make sure that people 
+                This application is designed to help all people be able to make healthy and nutritious meals based on
+                their own diet
+                or restrictions! Physical health and mental health are so closely tied together that we want to make
+                sure that people
                 can eat healthy!
             </p>
             <br>
-            <a class="signup-btn" href = "{{url_for('signup')}}">Sign Up Now</a>
+            <a class="signup-btn" href="{{url_for('signup')}}">Sign Up Now</a>
         </div>
         <div class="col-lg-5">
             <img src="{{ url_for('static', filename='/images/hero-img.jpg') }}" class="img-fluid" alt="hero image">
@@ -36,8 +46,10 @@
                         <img src="{{ url_for('static', filename='/images/recipes-icon.png') }}" alt="recipes icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">This application will provide you the recipes that maximize the most out of your groceries!
-                        There are no limits to what you can cook with the help of our application! We're looking to help better serve you!
+                    <p class="card-text">This application will provide you the recipes that maximize the most out of
+                        your groceries!
+                        There are no limits to what you can cook with the help of our application! We're looking to help
+                        better serve you!
                     </p>
                 </div>
             </div>
@@ -51,8 +63,10 @@
                         <img src="{{ url_for('static', filename='/images/ingredients-icon.png') }}"
                             alt="ingredients icon" class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Any ingredients you have, we can work with! No matter your budget, no matter what culture you're from, 
-                        our application can and will help you develop healthy eating habits from the resources you have access to!</p>
+                    <p class="card-text">Any ingredients you have, we can work with! No matter your budget, no matter
+                        what culture you're from,
+                        our application can and will help you develop healthy eating habits from the resources you have
+                        access to!</p>
                 </div>
             </div>
         </div>
@@ -66,7 +80,8 @@
                             class="my-3 card-icon">
                     </div>
                     <p class="card-text">Don't have time to plan out meals for the week?
-                        We can provide a plan that suits everyone with minimal effort on your part! Don't let your busy schedule change how healthy you eat!</p>
+                        We can provide a plan that suits everyone with minimal effort on your part! Don't let your busy
+                        schedule change how healthy you eat!</p>
                 </div>
             </div>
         </div>
