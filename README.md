@@ -3,7 +3,7 @@
 
 ## Description
 
-By: Sarah Fong (SarahFongHacks), Justin Goodman (Jgoody4), Thomas Ng (hicbag), Brian Nguyen (Brian1226)
+By: Sarah Fong (SarahFongHacks), Justin Goodman (Jgoody4 (TEST)), Thomas Ng (hicbag), Brian Nguyen (Brian1226)
 
 ### Problem Statement
 TBD
