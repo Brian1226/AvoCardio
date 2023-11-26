@@ -88,6 +88,8 @@ def recipes():
 
 @app.route("/", methods=['GET', 'POST'])
 def getRecipes():
+    title = "Recipes"
+    css_file = "recipes.css"
     if request.method == 'POST':
         query = request.form.get('search_query', '')
         recipes = search_recipes(query)
