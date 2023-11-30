@@ -73,6 +73,7 @@ def contact():
     return render_template("contact.html", form=form, title=title, css_file=css_file)
 
 @app.route("/recipe")
+@login_required
 def recipes():
     title = "Recipes"
     css_file = "recipes.css"
