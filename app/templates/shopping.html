@@ -2,12 +2,25 @@
 
 {% block content %}
 <div class="container-sm">
-    <div class="text-center my-5 green-font">
-        <h3>Shopping</h3>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            {% if current_user.is_authenticated %}
+            <div class="text-center my-5 green-font">
+                <h2>Shopping List</h2>
+            </div>
+            {% else %}
+            <div class="text-center my-5 green-font">
+                <h2>Shopping List</h2>
+            </div>
+            <p class="text-center">When using our site you can enjoy a suite of functions! Like finding ingredients
+                and shopping for the best ingredients at the best prices!
+            </p>
+            {% endif %}
+        </div>
     </div>
-    <p>
-        This is a paragraph
-    </p>
+</div>
+<div class="">
+    
 </div>
 
 {% endblock %}

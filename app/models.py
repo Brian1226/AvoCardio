@@ -45,3 +45,10 @@ class Ingredients(db.Model):
         return f"Ingredient('{self.name}', '{self.amount}', '{self.user_id}')"
     
     
+class ShoppingList(db.Model): 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(255), nullable = False, primary_key = True)
+    bought = db.Column(db.Boolean, nullable = True, default = False)
+    
+    def __repr__(self): 
+        return f"Ingredient('{self.name}')"

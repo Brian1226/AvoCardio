@@ -14,17 +14,12 @@
             </div>
             <p class="text-center">When using our site you can enjoy a suite of functions to create recipes from the ingredients which you have added to your account! Sign up today to start using it!</p>
             {% endif %}
-
         </div>
     </div>
-    <div class = "container">
-        {% for ingredient in ingredients %}
-            <p>{{ingredient.name}}</p>
-        {% endfor %}
-    </div>
-    <div>
-        <br><br><br><br><br>
-    </div>
 </div>
-
+<div class = "container">
+    {% for ingredient in ingredients %}
+        <p>{{ingredient.name}}</p>
+    {% endfor %}
+</div>
 {% endblock %}
