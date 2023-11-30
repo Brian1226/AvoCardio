@@ -45,8 +45,8 @@
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link ms-3 links" href="{{ url_for('about') }}"></i>About</a>
                     <a class="nav-link ms-3 links" href="{{ url_for('contact') }}"></i>Contact</a>
-                    <a class="nav-link ms-3 links" href="{{ url_for('logout') }}"></i>Logout</a>
                 </div>
+                <a class="logout-btn ms-3" href="{{ url_for('logout') }}">Logout</a> 
                 {% else %}
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link ms-3 links" href="{{ url_for('about') }}"></i>About</a>

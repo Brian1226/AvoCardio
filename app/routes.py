@@ -73,14 +73,13 @@ def contact():
     return render_template("contact.html", form=form, title=title, css_file=css_file)
 
 @app.route("/recipe")
-@login_required
 def recipes():
     title = "Recipes"
     css_file = "recipes.css"
     # user = User.query.filter_by(username=current_user.username().first())
-    user = current_user
-    ingredients = Ingredients.query.filter_by(user_id = user.id).all()
-    return render_template("recipes.html", title = title, css_file = css_file, ingredients = ingredients)
+    # user = current_user
+    # ingredients = Ingredients.query.filter_by(user_id = user.id).all()
+    return render_template("recipes.html", title = title, css_file = css_file)
 
 @app.route('/meal')
 def meal(): 

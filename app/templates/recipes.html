@@ -2,8 +2,20 @@
 
 {% block content %}
 <div class="container-sm">
-    <div class="text-center my-5 green-font">
-        <h3>Recipes</h3>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            {% if current_user.is_authenticated %}
+            <div class="text-center my-5 green-font">
+                <h2>Recipes</h2>
+            </div>
+            {% else %}
+            <div class="text-center my-5 green-font">
+                <h2>Recipes</h2>
+            </div>
+            <p class="text-center">When using our site you can enjoy a suite of functions to create recipes from the ingredients which you have added to your account! Sign up today to start using it!</p>
+            {% endif %}
+
+        </div>
     </div>
     <div class = "container">
         {% for ingredient in ingredients %}
