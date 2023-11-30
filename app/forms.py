@@ -20,7 +20,8 @@ class signup_form(FlaskForm):
     password = PasswordField("Password", validators=[DataRequired()], render_kw={"placeholder": "Enter your password"})
     signup = SubmitField("Sign Up")
 
-class add_ingredients(FlaskForm): 
-    name  = TextAreaField("Name", validators=[DataRequired()], render_kw={"placeholder": "Enter the ingredient name"})
-    amount = IntegerField("Amount", validators=[DataRequired()], render_kw={"placeholder": "Enter amount of the ingredient"})
+class workout_form(FlaskForm):
+    activity = StringField("Enter the workout activity name:", validators=[DataRequired()], render_kw={"placeholder": "Activity"})
+    duration = StringField("Enter the duration (mins):", validators=[DataRequired()], render_kw={"placeholder": "Duration"})
+    weight = StringField("Enter your weight (lbs):", validators=[DataRequired()], render_kw={"placeholder": "Weight"})
     submit = SubmitField("Submit")

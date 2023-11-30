@@ -1,8 +1,10 @@
-from flask import render_template, url_for, redirect, flash 
+from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
-from app.forms import contact_form, login_form, signup_form, add_ingredients
+from app.forms import contact_form, login_form, signup_form, workout_form
 from app.models import User, datetime, load_user, unauthorized, Ingredients
+import requests
+import json
 
 @app.route("/")
 def home():
@@ -79,12 +81,6 @@ def recipes():
     ingredients = Ingredients.query.filter_by(user_id = user.id).all()
     return render_template("recipes.html", title = title, css_file = css_file, ingredients = ingredients)
 
-@app.route('/ingredients')
-def ingredients(): 
-    title = "Ingredients"
-    css_file = "ingredients.css"
-    return render_template("ingredients.html", title = title, css_file = css_file)
-
 @app.route('/meal')
 def meal(): 
     title = "Meals"
@@ -97,8 +93,44 @@ def shopping():
     css_file = "shopping.css"
     return render_template("shopping.html", title = title, css_file = css_file)
 
-@app.route('/workout')
+@app.route('/workout', methods=["GET", "POST"])
 def workout(): 
     title = "Workout Plan"
     css_file = "workout.css"
-    return render_template("workout.html", title = title, css_file = css_file)
+    form = workout_form()
+    WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
+    result = []
+    
+    if form.validate_on_submit():
+        activity = request.form["activity"]
+        duration = request.form["duration"]
+        weight = request.form["weight"]
+        url = 'https://api.api-ninjas.com/v1/caloriesburned?activity={}&weight={}&duration={}'.format(activity,weight,duration)
+        result = calories_burned(WORKOUT_API_KEY, url)
+
+    return render_template("workout.html", title = title, css_file = css_file, form=form, result=result)
+
+def calories_burned(WORKOUT_API_KEY, url):
+    response = requests.get(url, headers={'X-Api-Key': WORKOUT_API_KEY})
+    
+    if response.status_code == requests.codes.ok:
+        response_list = response.json()
+        data_list = []
+
+        for data in response_list:
+            name = data.get("name", "")
+            calories_per_hour = data.get("calories_per_hour", "")
+            duration_minutes = data.get("duration_minutes", "")
+            total_calories = data.get("total_calories", "")
+            # duration_minutes = float(duration)
+            # total_calories = calories_per_hour * (duration_minutes / 60)
+
+            data_list.append ({
+                "name": name,
+                "calories_per_hour": calories_per_hour,
+                "duration_minutes": duration_minutes,
+                "total_calories": total_calories
+            })
+        return data_list
+    else:
+        return f"Error: {response.status_code} -> {response.text}"
