@@ -30,7 +30,7 @@ def login():
 @app.route("/logout")
 def logout(): 
     logout_user()
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
