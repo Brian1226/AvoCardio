@@ -38,6 +38,7 @@ class User(db.Model, UserMixin):
     
 class Ingredients(db.Model): 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    # ing_id = db.Column(db.Integer, nullable = False)
     name = db.Column(db.String(255), nullable = False, primary_key=True)
     amount = db.Column(db.Integer, nullable = False) 
 
