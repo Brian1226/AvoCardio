@@ -96,3 +96,9 @@ def shopping():
     title = "Shopping"
     css_file = "shopping.css"
     return render_template("shopping.html", title = title, css_file = css_file)
+
+@app.route('/workout')
+def workout(): 
+    title = "Workout Plan"
+    css_file = "workout.css"
+    return render_template("workout.html", title = title, css_file = css_file)
