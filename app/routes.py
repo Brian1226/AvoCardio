@@ -85,7 +85,7 @@ def recipes():
     # ingredients = Ingredients.query.filter_by(user_id = user.id).all()
     return render_template("recipes.html", title = title, css_file = css_file, recipes=[], search_query='')
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/recipe", methods=['GET', 'POST'])
 def getRecipes():
     title = "Recipes"
     css_file = "recipes.css"
