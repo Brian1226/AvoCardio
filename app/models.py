@@ -38,7 +38,6 @@ class User(db.Model, UserMixin):
     
 class Ingredients(db.Model): 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    # ing_id = db.Column(db.Integer, nullable = False)
     name = db.Column(db.String(255), nullable = False, primary_key=True)
     amount = db.Column(db.Integer, nullable = False) 
 
@@ -49,7 +48,8 @@ class Ingredients(db.Model):
 class ShoppingList(db.Model): 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(255), nullable = False, primary_key = True)
-    bought = db.Column(db.Boolean, nullable = True, default = False)
+    quantity = db.Column(db.Integer, nullable = False)
+    date_added = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     
     def __repr__(self): 
-        return f"Ingredient('{self.name}')"
+        return f"Item('{self.name}')"

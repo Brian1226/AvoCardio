@@ -26,6 +26,9 @@
             {% if current_user.is_authenticated %}
             {% else %}
             <a class="signup-btn" href="{{url_for('signup')}}">Sign Up Now</a>
+            <br>
+            <p>Already have an account?</p>
+            <a class="signup-btn" href="{{url_for('login')}}">Log in instead!</a>
             {% endif %}
 
         </div>
