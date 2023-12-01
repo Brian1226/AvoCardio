@@ -46,8 +46,9 @@ class Ingredients(db.Model):
     
     
 class ShoppingList(db.Model): 
+    item_id = db.Column(db.Integer, nullable = False, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    name = db.Column(db.String(255), nullable = False, primary_key = True)
+    name = db.Column(db.String(255), nullable = False)
     quantity = db.Column(db.Integer, nullable = False)
     date_added = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     

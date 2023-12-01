@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% for message in get_flashed_messages() %}
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        {{ message }}
-    </div>
-{% endfor %}
 <div class="container-sm">
     <div class="text-center my-5 green-font">
         <h3>Add an item to your list!</h3>
@@ -26,17 +20,16 @@
                             {{ form.submit(class="green-btn my-2")}}
                             <hr>
                         </form>
+                        <a class="btn btn-danger" href="{{ url_for('shopping') }}">Cancel</a>
                     </div>
                     <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-8 py-5 px-5>
                         <h4 style="text-align: center">You currently have no items in your list!</h4>
                     </div>
                 </div>
             </div>
-
-            <a href="{{url_for('shopping')}}" class="btn btn-primary">Cancel</a>
         {% else %}
         <div class="row my-5 justify-content-around align-items-start">
-            <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-8 py-5 px-5">
+            <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-8 py-3 px-5">
                 <form method="POST">
                     {{ form.hidden_tag() }}
                     {{ form.name.label }}
@@ -44,18 +37,24 @@
                     {{ form.quantity.label }}
                     {{ form.quantity(class="col-12 mb-3 p-2") }}
                     {{ form.submit(class="green-btn my-2")}}
-                    <hr>
+                    <hr> 
                 </form>
+                <a class="btn btn-danger" href="{{ url_for('shopping') }}">Cancel</a>
             </div>
-            {% for item in shoplist %}
-                <div class="card">
-                    <h5 class="card-header">{{ item.name }}</h5>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">Quantity: {{ item.quantity }}</p>
+            <div class="container pt-3">
+                <div class="row">
+                    {% for item in shoplist %}
+                    <div class="col pb-3"> 
+                        <div class="card" style="width: 12rem;">
+                            <h5 class="card-header">{{ item.name }}</h5>
+                            <div class="card-body">
+                                <p class="card-text">Quantity: {{ item.quantity }}</p>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
         {% endif %}
     </div>
 </div>

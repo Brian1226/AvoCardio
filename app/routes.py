@@ -115,10 +115,24 @@ def addItem():
         return redirect(url_for('shopping'))
     return render_template("additem.html", title = title, css_file = css_file, form=form, shoplist=shoplist)
 
-@app.route('/updateQuan', methods=["GET", "POST"])
+@app.route('/updateQuan/<int:itemnumber>', methods=["GET", "POST"])
 @login_required
-def updateQuan(): 
+def updateQuan(itemnumber): 
+    item = ShoppingList.query.get_or_404(itemnumber) 
+    if item.user_id != current_user.id: 
+        return redirect(url_for('home'))
+    
     return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css')
+
+@app.route('/deleteItem/<int:itemnumber>', methods=["GET", "POST"])
+@login_required
+def deleteItem(itemnumber): 
+    item = ShoppingList.query.get_or_404(itemnumber)
+    if item.user_id != current_user.id: 
+        return redirect(url_for('home'))
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for('shopping'))
 
 @app.route('/workout', methods=["GET", "POST"])
 @login_required
