@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!DOCTYPE html>
+
+
+<div class="container-sm">
+    <div class="text-center my-5 green-font">
+        <h3>Meals</h3>
+    </div>
+    {% for meal in meals %}
+        <li>
+            <h5 class="recipe-title">{{ meal.mealname }}</h5>
+        </li>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <div class="text-center my-5 green-font">
@@ -60,17 +76,4 @@
 </div>
 
 </body>
-</html>
-
-<!-- <div class="container-sm">
-    <div class="text-center my-5 green-font">
-        <h3>Meals</h3>
-    </div>
-    {% for meal in meals %}
-        <li>
-            <h5 class="recipe-title">{{ meal.name }}</h5>
-        </li>
-    {% endfor %}
-</div> -->
-
-{% endblock %}
+</html> -->
