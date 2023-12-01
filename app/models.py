@@ -45,3 +45,12 @@ class Ingredients(db.Model):
         return f"Ingredient('{self.name}', '{self.amount}', '{self.user_id}')"
     
     
+class ShoppingList(db.Model): 
+    item_id = db.Column(db.Integer, nullable = False, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(255), nullable = False)
+    quantity = db.Column(db.Integer, nullable = False)
+    date_added = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
+    
+    def __repr__(self): 
+        return f"Item('{self.name}')"

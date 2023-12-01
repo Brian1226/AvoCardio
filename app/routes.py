@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
-from app.forms import contact_form, login_form, signup_form, workout_form
-from app.models import User, datetime, load_user, unauthorized, Ingredients
+from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form
+from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList
 import requests
 import json
 from urllib.parse import unquote
@@ -32,9 +32,10 @@ def login():
     return render_template("login.html", form=form)
 
 @app.route("/logout")
+@login_required
 def logout(): 
     logout_user()
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -77,6 +78,7 @@ def contact():
     return render_template("contact.html", form=form, title=title, css_file=css_file)
 
 @app.route("/recipe")
+@login_required
 def recipes():
     title = "Recipes"
     css_file = "recipes.css"
@@ -132,18 +134,58 @@ def view_Recipe(recipe_id):
     return "Recipe not found", 404
 
 @app.route('/meal')
+@login_required
 def meal(): 
     title = "Meals"
     css_file = "meal.css"
     return render_template("meal.html", title = title, css_file = css_file)
 
 @app.route('/shopping')
+@login_required
 def shopping(): 
     title = "Shopping"
     css_file = "shopping.css"
-    return render_template("shopping.html", title = title, css_file = css_file)
+    shop = ShoppingList.query.filter_by(user_id=current_user.id).all()
+    return render_template("shopping.html", title = title, css_file = css_file, shoplist = shop) 
+
+@app.route('/addShoppingItem', methods=["GET", "POST"])
+@login_required
+def addItem(): 
+    print(current_user.id)
+    title = "Add shopping item"
+    css_file = 'shopping.css' 
+    form = shopping_form()
+    shoplist = ShoppingList.query.filter_by(user_id=current_user.id).all()
+    if form.validate_on_submit(): 
+        itemname = request.form["name"]
+        itemquantity = request.form["quantity"]
+        item = ShoppingList(user_id=current_user.id, name=itemname, quantity=itemquantity) 
+        db.session.add(item)
+        db.session.commit()
+        return redirect(url_for('shopping'))
+    return render_template("additem.html", title = title, css_file = css_file, form=form, shoplist=shoplist)
+
+@app.route('/updateQuan/<int:itemnumber>', methods=["GET", "POST"])
+@login_required
+def updateQuan(itemnumber): 
+    item = ShoppingList.query.get_or_404(itemnumber) 
+    if item.user_id != current_user.id: 
+        return redirect(url_for('home'))
+    
+    return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css')
+
+@app.route('/deleteItem/<int:itemnumber>', methods=["GET", "POST"])
+@login_required
+def deleteItem(itemnumber): 
+    item = ShoppingList.query.get_or_404(itemnumber)
+    if item.user_id != current_user.id: 
+        return redirect(url_for('home'))
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for('shopping'))
 
 @app.route('/workout', methods=["GET", "POST"])
+@login_required
 def workout(): 
     title = "Workout Plan"
     css_file = "workout.css"

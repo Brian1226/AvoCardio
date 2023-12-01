@@ -41,12 +41,20 @@
                     <a class="nav-link me-3 links" href="{{ url_for('shopping') }}"></i>Shopping List</a>
                     <a class="nav-link me-3 links" href="{{ url_for('workout') }}"></i>Workouts</a>
                 </div>
+                {% if current_user.is_authenticated %}
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link ms-3 links" href="{{ url_for('about') }}"></i>About</a>
+                    <a class="nav-link ms-3 links" href="{{ url_for('contact') }}"></i>Contact</a>
+                </div>
+                <a class="logout-btn ms-3" href="{{ url_for('logout') }}">Logout</a> 
+                {% else %}
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link ms-3 links" href="{{ url_for('about') }}"></i>About</a>
                     <a class="nav-link ms-3 links" href="{{ url_for('contact') }}"></i>Contact</a>
                     <a class="nav-link ms-3 links" href="{{ url_for('login') }}"></i>Login</a>
                 </div>
-                <a class="signup-btn ms-3" href="{{ url_for('signup') }}">Sign Up</a>
+                <a class="signup-btn ms-3" href="{{ url_for('signup') }}">Sign Up</a> 
+                {% endif %}
             </div>
         </div>
     </nav>

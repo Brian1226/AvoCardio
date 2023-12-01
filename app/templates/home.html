@@ -23,7 +23,14 @@
                 can eat healthy!
             </p>
             <br>
+            {% if current_user.is_authenticated %}
+            {% else %}
             <a class="signup-btn" href="{{url_for('signup')}}">Sign Up Now</a>
+            <br>
+            <p>Already have an account?</p>
+            <a class="signup-btn" href="{{url_for('login')}}">Log in instead!</a>
+            {% endif %}
+
         </div>
         <div class="col-lg-5">
             <img src="{{ url_for('static', filename='/images/hero-img.jpg') }}" class="img-fluid" alt="hero image">
