@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form
-from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList
+from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList, Recipes
 import requests
 import json
 from urllib.parse import unquote
@@ -138,7 +138,8 @@ def view_Recipe(recipe_id):
 def meal(): 
     title = "Meals"
     css_file = "meal.css"
-    return render_template("meal.html", title = title, css_file = css_file)
+    # meals = db.session.execute(db.select(Recipes).filter_by(user_id=current_user.get_id()))
+    return render_template("meal.html", title = title, css_file = css_file, meals = meals)
 
 @app.route('/shopping')
 @login_required
