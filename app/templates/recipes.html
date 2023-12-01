@@ -5,10 +5,29 @@
     <div class="text-center my-5 green-font">
         <h3>Recipes</h3>
     </div>
-    <div class = "container">
-        {% for ingredient in ingredients %}
-            <p>{{ingredient.name}}</p>
-        {% endfor %}
+    <div class="container text-center">
+        <form method="POST" action="/">
+            <input type="text" name="search_query" placeholder="Search For Recipes">
+            <input type="submit" value="Search">
+            <a href="/recipe" class="recipe-button">Restart Search</a>
+        </form>
+
+        {% if recipes%}
+        <h4>Results for "{{ search_query }}"</h4>
+        <ul>
+            {% for recipe in recipes %}
+            <li>
+                <h5 class="recipe-title">{{ recipe.title }}</h5>
+                {% if recipe.image %}
+                <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                {% endif %}
+                <a href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No Recipes Found</p>
+        {% endif %}
     </div>
     <div>
         <br><br><br><br><br>
