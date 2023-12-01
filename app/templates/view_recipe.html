@@ -41,9 +41,20 @@
         .ingredient-list, .instruction-list {
             text-align: left;
         }
+        
     </style>
 </head>
 <body>
+
+    {% block content %}
+     <!--popup message when sign up / log in is successful or not-->
+     {% for message in get_flashed_messages() %}
+     <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         {{ message }}
+     </div>
+     {% endfor %}
+
     <div class="recipe-details">
         <h1>{{ recipe.title }}</h1>
 
@@ -51,7 +62,6 @@
         {% if recipe.image %}
         <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
         {% endif %}
-
         <!-- Ingredients section -->
         <h2 class="section-title">Ingredients</h2>
         <!-- Create an unordered list for displaying the ingredients -->
@@ -72,4 +82,12 @@
         <a href="/?search_query={{ search_query }}">Back To Search Results</a>
     </div>
 </body>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }}
+    {{ form.name(class="col-12 mb-3 p-2") }}
+    {{ form.save(class="green-btn my-2") }}
+    <hr>
+</form>
+{% endblock %}
 </html>
