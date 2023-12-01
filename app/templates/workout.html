@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-sm">
+    <div class="text-center my-5 green-font">
+        <h3>Calories Burned from Workouts</h3>
+    </div>
+
+    <!-- <form method="POST" action="/workout">
+        <label for="activity">Enter workout activity:</label>
+        <input type="text" id="activity" name="activity" required>
+        <br>
+        <label for="duration">Enter duration in minutes:</label>
+        <input type="text" id="duration" name="duration" required>
+        <br>
+        <label for="weight">Enter your weight:</label>
+        <input type="text" id="weight" name="weight" required>
+        <button type="submit">Submit</button>
+    </form> -->
+
+    <div class="container-fluid">
+        <div class="row my-5 justify-content-around align-items-start">
+            <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-8 py-5 px-5">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    {{ form.activity.label }}
+                    {{ form.activity(class="col-12 mb-3 p-2") }}
+                    {{ form.duration.label }}
+                    {{ form.duration(class="col-12 mb-3 p-2") }}
+                    {{ form.weight.label }}
+                    {{ form.weight(class="col-12 mb-3 p-2") }}
+                    {{ form.submit(class="green-btn my-2") }}
+                    <hr>
+                </form>
+            </div>
+            {% if result %}
+            <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-8 py-5 px-5">
+                {% for data in result %}
+                <p> Workout activity name: {{ data.name }} </p>
+                <p> Calories burned per hour: {{ data.calories_per_hour }} </p>
+                <p> Duration in minutes: {{ data.duration_minutes }} </p>
+                <p> Total calories burned: {{ data.total_calories }} </p>
+                <hr>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
