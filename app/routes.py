@@ -5,6 +5,10 @@ from app.forms import contact_form, login_form, signup_form, workout_form
 from app.models import User, datetime, load_user, unauthorized, Ingredients
 import requests
 import json
+from urllib.parse import unquote
+
+SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
+WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
 def home():
@@ -77,9 +81,55 @@ def recipes():
     title = "Recipes"
     css_file = "recipes.css"
     # user = User.query.filter_by(username=current_user.username().first())
-    user = current_user
-    ingredients = Ingredients.query.filter_by(user_id = user.id).all()
-    return render_template("recipes.html", title = title, css_file = css_file, ingredients = ingredients)
+    # user = current_user
+    # ingredients = Ingredients.query.filter_by(user_id = user.id).all()
+    return render_template("recipes.html", title = title, css_file = css_file, recipes=[], search_query='')
+
+@app.route("/", methods=['GET', 'POST'])
+def getRecipes():
+    title = "Recipes"
+    css_file = "recipes.css"
+    if request.method == 'POST':
+        query = request.form.get('search_query', '')
+        recipes = search_recipes(query)
+        return render_template('recipes.html', title = title, css_file = css_file, recipes=recipes, search_query=query)
+
+    search_query = request.args.get('search-query', '')
+    decoded_search_query = unquote(search_query)
+    recipes = search_recipes(decoded_search_query)
+    return render_template('recipes.html', title = title, css_file = css_file, recipes=recipes, search_query=decoded_search_query)
+
+def search_recipes(query):
+    url = f'https://api.spoonacular.com/recipes/complexSearch'
+    params = {
+        'apiKey': SPOONACULAR_API_KEY,
+        'query': query,
+        'number': 10,
+        'instructionsRequired': True,
+        'addRecipeInformation': True,
+        'fillIngredients': True,
+    }
+
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        return data['results']
+    return []
+
+@app.route('/recipe/<int:recipe_id>')
+def view_Recipe(recipe_id):
+    search_query = request.args.get('search_query', '')
+    url = f'https://api.spoonacular.com/recipes/{recipe_id}/information'
+    params = {
+        'apiKey': SPOONACULAR_API_KEY,
+    }
+
+    response = requests.get(url, params=params)
+
+    if response.status_code == 200:
+        recipe = response.json()
+        return render_template('view_recipe.html', recipe=recipe, search_query=search_query)
+    return "Recipe not found", 404
 
 @app.route('/meal')
 def meal(): 
@@ -98,7 +148,6 @@ def workout():
     title = "Workout Plan"
     css_file = "workout.css"
     form = workout_form()
-    WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
     result = []
     
     if form.validate_on_submit():
