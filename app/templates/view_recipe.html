@@ -1,93 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>{{ recipe.title }}</title>
-    <style>
-        body {
-            text-align: center;
-            margin: 40px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        h1, h2 {
-            margin-bottom: 20px;
-        }
-        ul, ol {
-            text-align: left;
-            list-style-position: inside;
-            padding-left: 20px;
-        }
-        img {
-            display: block;
-            margin: 0 auto;
-            max-width: 300px;
-            margin-bottom: 20px;
-        }
-        a {
-            display: inline-block;
-            margin-top: 10px;
-            color: blue;
-            text-decoration: underline;
-        }
-        .recipe-details {
-            max-width: 700px;
-            margin: 0 auto;
-            border: 2px solid #ccc;
-            padding: 20px;
-        }
-        .section-title {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-        .ingredient-list, .instruction-list {
-            text-align: left;
-        }
-        
-    </style>
+    <link rel="stylesheet" href="../static/css/view_recipe.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
+
 <body>
-
     {% block content %}
-     <!--popup message when sign up / log in is successful or not-->
-     {% for message in get_flashed_messages() %}
-     <div class="alert alert-success alert-dismissible fade show" role="alert">
-         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-         {{ message }}
-     </div>
-     {% endfor %}
-
-    <div class="recipe-details">
-        <h1>{{ recipe.title }}</h1>
-
-        <!-- Display the recipe image if available -->
-        {% if recipe.image %}
-        <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
-        {% endif %}
-        <!-- Ingredients section -->
-        <h2 class="section-title">Ingredients</h2>
-        <!-- Create an unordered list for displaying the ingredients -->
-        <ul class="ingredient-list">
-            <!-- Loop through each ingredient in the recipe's extendedIngredients -->
-            {% for ingredient in recipe.extendedIngredients %}
-            <li>{{ ingredient.original }}</li>
-            {% endfor %}
-        </ul>
-
-        <!-- Instructions Section -->
-        <h2 class="section-title">Instructions</h2>
-        <ol class="instruction-list">
-            {% for step in recipe.analyzedInstructions[0].steps %}
-            <li>{{ step.step }}</li>
-            {% endfor %}
-        </ol>
-        <a href="/?search_query={{ search_query }}">Back To Search Results</a>
+    <!--popup message when sign up / log in is successful or not-->
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        {{ message }}
     </div>
+    {% endfor %}
+
+    <div class="container-fluid mt-3">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-7">
+                <div class="card border card-shadow p-3">
+                    <div class="card-body">
+                        <h1 class="text-center">{{ recipe.title }}</h1>
+
+                        <!-- Display the recipe image if available -->
+                        {% if recipe.image %}
+                        <img class="img-fluid mx-auto d-block my-3" src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                        {% endif %}
+
+                        <!--Extra info Section-->
+                        <p class="text-center mb-0">Servings: {{ recipe.servings }} </p>
+                        <p class="text-center">Ready Time: {{ recipe.readyInMinutes }} mins</p>
+
+                        <!-- Ingredients Section -->
+                        <h2 class="">Ingredients</h2>
+                        <!-- Create an unordered list for displaying the ingredients -->
+                        <ul class="ingredient-list">
+                            <!-- Loop through each ingredient in the recipe's extendedIngredients -->
+                            {% for ingredient in recipe.extendedIngredients %}
+                            <li>{{ ingredient.original }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        <!-- Instructions Section -->
+                        <h2 class="">Instructions</h2>
+                        <ol class="instruction-list">
+                            {% for step in recipe.analyzedInstructions[0].steps %}
+                            <li>{{ step.step }}</li>
+                            {% endfor %}
+                        </ol>
+
+                        <a class="text-center d-block" href="/?search_query={{ search_query }}">Back To Search
+                            Results</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7 mt-3">
+                <!--Form for saving recipe-->
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    {{ form.name.label }}
+                    {{ form.name(class="col-12 my-2 p-2") }}
+                    {{ form.save(class="green-btn p-2") }}
+                    <hr>
+                </form>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+
+    <!--JS bundle to make certain Bootstrap components work-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 </body>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.name.label }}
-    {{ form.name(class="col-12 mb-3 p-2") }}
-    {{ form.save(class="green-btn my-2") }}
-    <hr>
-</form>
-{% endblock %}
+
 </html>

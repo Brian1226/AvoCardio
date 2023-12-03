@@ -7,7 +7,7 @@ import requests
 import json
 from urllib.parse import unquote
 
-SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
+SPOONACULAR_API_KEY = 'eea1c812745244feb1cf0f2e1f715aa0'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
@@ -106,7 +106,7 @@ def search_recipes(query):
     params = {
         'apiKey': SPOONACULAR_API_KEY,
         'query': query,
-        'number': 10,
+        'number': 60,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
