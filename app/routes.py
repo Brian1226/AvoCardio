@@ -1,13 +1,12 @@
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
-from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form
-from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList
+from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
+from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList, Recipes
 import requests
-import json
 from urllib.parse import unquote
 
-SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
+SPOONACULAR_API_KEY = 'b2f65bc19f3344e08f45d09027dc76c1'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
@@ -106,7 +105,7 @@ def search_recipes(query):
     params = {
         'apiKey': SPOONACULAR_API_KEY,
         'query': query,
-        'number': 10,
+        'number': 20,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -118,27 +117,46 @@ def search_recipes(query):
         return data['results']
     return []
 
-@app.route('/recipe/<int:recipe_id>')
+@app.route('/recipe/<int:recipe_id>', methods=['GET', 'POST'])
 def view_Recipe(recipe_id):
+    form = meal_form()
     search_query = request.args.get('search_query', '')
     url = f'https://api.spoonacular.com/recipes/{recipe_id}/information'
     params = {
         'apiKey': SPOONACULAR_API_KEY,
     }
+    
+    if form.validate_on_submit():
+        name = request.form["name"]
+        newrecipe = Recipes(id=recipe_id, mealname=name, user_id=current_user.id)
+        db.session.add(newrecipe)
+        db.session.commit()
 
     response = requests.get(url, params=params)
 
     if response.status_code == 200:
         recipe = response.json()
-        return render_template('view_recipe.html', recipe=recipe, search_query=search_query)
-    return "Recipe not found", 404
+        flash("Added to your Recipes!")
+        return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
+    return "Recipe not found", 404    
 
 @app.route('/meal')
 @login_required
 def meal(): 
     title = "Meals"
     css_file = "meal.css"
-    return render_template("meal.html", title = title, css_file = css_file)
+    meals = Recipes.query.filter_by(user_id=current_user.id).all()
+    # c = 0
+    # for i in range(0, len(meals)):
+    #     url = f'https://api.spoonacular.com/recipes/{recipes[i].id}/information'
+    #     params = {
+    #         'apiKey': SPOONACULAR_API_KEY,
+    #     }
+    #     response = requests.get(url, params=params)
+    #     if response.status_code == 200:
+    #         meals[c] = response.json()
+    #         c += 1            
+    return render_template("meal.html", title = title, css_file = css_file, meals = meals)
 
 @app.route('/shopping')
 @login_required
@@ -213,8 +231,6 @@ def calories_burned(WORKOUT_API_KEY, url):
             calories_per_hour = data.get("calories_per_hour", "")
             duration_minutes = data.get("duration_minutes", "")
             total_calories = data.get("total_calories", "")
-            # duration_minutes = float(duration)
-            # total_calories = calories_per_hour * (duration_minutes / 60)
 
             data_list.append ({
                 "name": name,

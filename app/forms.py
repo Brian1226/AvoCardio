@@ -30,3 +30,7 @@ class shopping_form(FlaskForm):
     name = StringField("What item are you adding?:", validators=[DataRequired()])
     quantity = IntegerField("How many of them do you want?:", validators=[DataRequired()])
     submit = SubmitField("Add the item!")
+
+class meal_form(FlaskForm):
+    name = StringField("Name your meal:", render_kw={"placeholder": "Meal name"})
+    save = SubmitField("Save Recipe")

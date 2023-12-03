@@ -5,32 +5,33 @@
     <div class="text-center my-5 green-font">
         <h3>Recipes</h3>
     </div>
-    <div class="container text-center">
-        <form method="POST" action="/recipe">
-            <input type="text" name="search_query" placeholder="Search For Recipes">
-            <input type="submit" value="Search">
-            <a href="/recipe" class="recipe-button">Restart Search</a>
+    <div class="container text-center mb-5">
+        <form class="mb-3" method="POST">
+            <input class="p-2" type="text" name="search_query" placeholder="Search For Recipes">
+            <input class="green-btn p-2" type="submit" value="Search">
+            <a href="/recipe" class="">Restart Search</a>
         </form>
 
         {% if recipes%}
         <h4>Results for "{{ search_query }}"</h4>
-        <ul>
+        <div class="row">
             {% for recipe in recipes %}
-            <li>
-                <h5 class="recipe-title">{{ recipe.title }}</h5>
-                {% if recipe.image %}
-                <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
-                {% endif %}
-                <a href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
-            </li>
+            <div class="col-lg-3 col-md-4 g-3">
+                <div class="card d-flex flex-column h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        {% if recipe.image %}
+                        <img class="card-img img-fluid" src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                        {% endif %}
+                    </div>
+                    <a class="mt-auto" href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
         {% else %}
         <p>No Recipes Found</p>
         {% endif %}
-    </div>
-    <div>
-        <br><br><br><br><br>
     </div>
 </div>
 
