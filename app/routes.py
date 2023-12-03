@@ -4,7 +4,6 @@ from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
 from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList, Recipes
 import requests
-import json
 from urllib.parse import unquote
 
 SPOONACULAR_API_KEY = 'eea1c812745244feb1cf0f2e1f715aa0'
@@ -232,8 +231,6 @@ def calories_burned(WORKOUT_API_KEY, url):
             calories_per_hour = data.get("calories_per_hour", "")
             duration_minutes = data.get("duration_minutes", "")
             total_calories = data.get("total_calories", "")
-            # duration_minutes = float(duration)
-            # total_calories = calories_per_hour * (duration_minutes / 60)
 
             data_list.append ({
                 "name": name,
