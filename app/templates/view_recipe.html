@@ -34,22 +34,38 @@
                         <p class="text-center mb-0">Servings: {{ recipe.servings }} </p>
                         <p class="text-center">Ready Time: {{ recipe.readyInMinutes }} mins</p>
 
-                        <!-- Ingredients Section -->
-                        <h2 class="">Ingredients</h2>
-                        <!-- Create an unordered list for displaying the ingredients -->
-                        <ul class="ingredient-list">
-                            <!-- Loop through each ingredient in the recipe's extendedIngredients -->
+                        <!--Summary Section-->
+                        <h2>Summary</h2>
+                        {% if recipe.summary %}
+                        <p>{{ recipe.summary|striptags }}</p>
+                        {% else %}
+                        <p>No summary for this recipe found.</p>
+                        {% endif %}
+
+                        <!--Ingredients Section-->
+                        <h2>Ingredients</h2>
+                        <ul>
+                            {% if recipe.extendedIngredients %}
                             {% for ingredient in recipe.extendedIngredients %}
                             <li>{{ ingredient.original }}</li>
                             {% endfor %}
+                            {% else %}
+                            <p>No Ingredients for this recipe found.</p>
+                            {% endif %}
                         </ul>
 
-                        <!-- Instructions Section -->
-                        <h2 class="">Instructions</h2>
-                        <ol class="instruction-list">
-                            {% for step in recipe.analyzedInstructions[0].steps %}
+                        <!--Instructions Section-->
+                        <h2>Instructions</h2>
+                        <ol>
+                            {% if recipe.analyzedInstructions %}
+                            {% for instructions in recipe.analyzedInstructions %}
+                            {% for step in instructions.steps %}
                             <li>{{ step.step }}</li>
                             {% endfor %}
+                            {% endfor %}
+                            {% else %}
+                            <p>No instructions found for this recipe.</p>
+                            {% endif %}
                         </ol>
 
                         <a class="text-center d-block" href="/?search_query={{ search_query }}">Back To Search
