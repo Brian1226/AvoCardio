@@ -27,9 +27,9 @@ class workout_form(FlaskForm):
     submit = SubmitField("Submit")
     
 class shopping_form(FlaskForm):
-    name = StringField("What item are you adding?:", validators=[DataRequired()])
-    quantity = IntegerField("How many of them do you want?:", validators=[DataRequired()])
-    submit = SubmitField("Add the item!")
+    name = StringField("What item are you adding?:", validators=[DataRequired()], render_kw={"placeholder": "Item"})
+    quantity = IntegerField("How many of them do you want?:", validators=[DataRequired()], render_kw={"placeholder": "Quantity"})
+    submit = SubmitField("Add item")
 
 class meal_form(FlaskForm):
     name = StringField("Name your meal:", render_kw={"placeholder": "Meal name"})
