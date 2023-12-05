@@ -125,12 +125,21 @@ def view_Recipe(recipe_id):
     params = {
         'apiKey': SPOONACULAR_API_KEY,
     }
+
     
     if form.validate_on_submit():
         name = request.form["name"]
-        newrecipe = Recipes(id=recipe_id, mealname=name, user_id=current_user.id)
+        newrecipe = Recipes(recipe_id=recipe_id, mealname=name, user_id=current_user.id)
         db.session.add(newrecipe)
         db.session.commit()
+
+        # List the ingredients in the recipe selected 
+        ingResponse = requests.get(f'https://api.spoonacular.com/recipes/{recipe_id}/ingredientWidget.json', params = params)
+        ingList = ingResponse.json()
+        for i in len(ingList['ingredients']): 
+            shoppingitem = ShoppingList(name=ingList['ingredients'][i]['name'], quantity=int(ingList['ingredients'][i]['amount']['us']['value'])+ingList['ingredients'][i]['amount']['us']['unit'])
+            db.session.add(shoppingitem)
+            db.session.commit()
 
     response = requests.get(url, params=params)
 

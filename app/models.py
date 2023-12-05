@@ -40,6 +40,7 @@ class Ingredients(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(255), nullable = False, primary_key=True)
     amount = db.Column(db.Integer, nullable = False) 
+    # recipe = 
 
     def __repr__(self): 
         return f"Ingredient('{self.name}', '{self.amount}', '{self.user_id}')"
@@ -49,14 +50,14 @@ class ShoppingList(db.Model):
     item_id = db.Column(db.Integer, nullable = False, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(255), nullable = False)
-    quantity = db.Column(db.Integer, nullable = False)
+    quantity = db.Column(db.String, nullable = False)
     date_added = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     
     def __repr__(self): 
         return f"Item('{self.name}')"
     
 class Recipes(db.Model):
-    id = db.Column(db.String(255), primary_key=True)
+    recipe_id = db.Column(db.Integer, primary_key=True)
     mealname = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
