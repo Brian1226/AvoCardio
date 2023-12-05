@@ -133,13 +133,9 @@ def view_Recipe(recipe_id):
         db.session.add(newrecipe)
         db.session.commit()
 
-        # List the ingredients in the recipe selected 
-        ingResponse = requests.get(f'https://api.spoonacular.com/recipes/{recipe_id}/ingredientWidget.json', params = params)
-        ingList = ingResponse.json()
-        for i in len(ingList['ingredients']): 
-            shoppingitem = ShoppingList(name=ingList['ingredients'][i]['name'], quantity=int(ingList['ingredients'][i]['amount']['us']['value'])+ingList['ingredients'][i]['amount']['us']['unit'])
-            db.session.add(shoppingitem)
-            db.session.commit()
+        # shoppingitem = ShoppingList()
+        # db.session.add(shoppingitem)
+        # db.session.commit()
 
     response = requests.get(url, params=params)
 

@@ -51,6 +51,7 @@ class ShoppingList(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(255), nullable = False)
     quantity = db.Column(db.String, nullable = False)
+    recipe_name = db.Column(db.String, nullable = True)
     date_added = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
     
     def __repr__(self): 
