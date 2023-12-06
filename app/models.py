@@ -51,7 +51,7 @@ class ShoppingList(db.Model):
     name = db.Column(db.String(255), nullable = False)
     quantity = db.Column(db.Integer, nullable = False)
     date_added = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
-    recipe_name = db.Column(db.String, nullable = True)
+    recipe_name = db.Column(db.String, nullable = True, default = 'Misc')
     
     def __repr__(self): 
         return f"Item('{self.name}')"
