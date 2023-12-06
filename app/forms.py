@@ -32,5 +32,5 @@ class shopping_form(FlaskForm):
     submit = SubmitField("Add the item!")
 
 class meal_form(FlaskForm):
-    name = StringField("Name your meal:")
+    # name = StringField("Name your meal:")
     save = SubmitField("Save Recipe")

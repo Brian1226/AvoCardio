@@ -54,14 +54,23 @@
          {{ message }}
      </div>
      {% endfor %}
-
+    
     <div class="recipe-details">
+        <a style="text-decoration:none; float: left" href="/?search_query={{ search_query }}">Back To Search Results</a>
+        <br>
         <h1>{{ recipe.title }}</h1>
 
         <!-- Display the recipe image if available -->
         {% if recipe.image %}
         <img src="{{ recipe.image }}" alt="{{ recipe.title }}">
         {% endif %}
+
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.save(class="green-btn my-2") }}
+            <hr>
+        </form>
+
         <!-- Ingredients section -->
         <h2 class="section-title">Ingredients</h2>
         <!-- Create an unordered list for displaying the ingredients -->
@@ -79,15 +88,7 @@
             <li>{{ step.step }}</li>
             {% endfor %}
         </ol>
-        <a href="/?search_query={{ search_query }}">Back To Search Results</a>
     </div>
 </body>
-<form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.name.label }}
-    {{ form.name(class="col-12 mb-3 p-2") }}
-    {{ form.save(class="green-btn my-2") }}
-    <hr>
-</form>
 {% endblock %}
 </html>
