@@ -128,8 +128,7 @@ def view_Recipe(recipe_id):
     }
     
     if form.validate_on_submit():
-        name = request.form["name"]
-        newrecipe = Recipes(id=recipe_id, mealname=name, user_id=current_user.id)
+        newrecipe = Recipes(api_key=recipe_id, user_id=current_user.id)
         db.session.add(newrecipe)
         db.session.commit()
 
@@ -146,18 +145,33 @@ def view_Recipe(recipe_id):
 def meal(): 
     title = "Meals"
     css_file = "meal.css"
-    meals = Recipes.query.filter_by(user_id=current_user.id).all()
-    # c = 0
-    # for i in range(0, len(meals)):
-    #     url = f'https://api.spoonacular.com/recipes/{recipes[i].id}/information'
-    #     params = {
-    #         'apiKey': SPOONACULAR_API_KEY,
-    #     }
-    #     response = requests.get(url, params=params)
-    #     if response.status_code == 200:
-    #         meals[c] = response.json()
-    #         c += 1            
+    recipes = Recipes.query.filter_by(user_id=current_user.id).all()
+    meals = []
+    for i in range(0, len(recipes)):
+        url = f'https://api.spoonacular.com/recipes/{recipes[i].api_key}/information'
+        params = {
+            'apiKey': SPOONACULAR_API_KEY,
+        }
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            # print("meal api key: " + recipes[i].api_key)
+            meals.append(response.json())
     return render_template("meal.html", title = title, css_file = css_file, meals = meals)
+
+@app.route('/meal/<int:meal_id>')
+@login_required
+def view_meal(meal_id):
+    url = f'https://api.spoonacular.com/recipes/{meal_id}/information'
+    params = {
+        'apiKey': SPOONACULAR_API_KEY,
+    }
+    css_file = "recipes.css"
+    meal = request.args.get('meal', '')
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        meal = response.json()
+        return render_template('view_meal.html', meal=meal)
+    return "Recipe not found", 404 
 
 @app.route('/shopping')
 @login_required
