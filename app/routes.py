@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
-from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList, Recipes
+from app.models import User, datetime, load_user, unauthorized, ShoppingList, Recipes
 import requests
 from urllib.parse import unquote
 
@@ -193,7 +193,16 @@ def updateQuan(itemnumber):
     if item.user_id != current_user.id: 
         return redirect(url_for('home'))
     
-    return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css')
+    if request.method == 'POST': 
+        item.name = request.form['name']
+        item.quantity = request.form['quantity']
+        item.recipe_name = request.form['recipe'] 
+        db.session.commit() 
+        return redirect(url_for('shopping'))
+            
+        
+    else: 
+        return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css', item=item)
 
 @app.route('/deleteItem/<int:itemnumber>', methods=["GET", "POST"])
 @login_required

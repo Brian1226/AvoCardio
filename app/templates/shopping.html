@@ -30,7 +30,7 @@
                     {% if item.recipe_name %}
                     <p class="card-text">Recipe: {{ item.recipe_name }}</p>
                     {% endif %}
-                    <!-- <a href="{{ url_for('updateQuan', itemnumber=item.item_id) }}" class="btn btn-primary">Update quantity</a> -->
+                    <a href="{{ url_for('updateQuan', itemnumber=item.item_id) }}" class="btn btn-primary">Update</a>
                     <a href="{{ url_for('deleteItem', itemnumber=item.item_id) }}" class="btn btn-danger">Delete</a>
                 </div>
             </div>
