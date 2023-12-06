@@ -126,16 +126,19 @@ def view_Recipe(recipe_id):
         'apiKey': SPOONACULAR_API_KEY,
     }
     
+    response = requests.get(url, params=params)
+    recipe = response.json()
+    
     if form.validate_on_submit():
         name = request.form["name"]
-        newrecipe = Recipes(id=recipe_id, mealname=name, user_id=current_user.id)
+        newrecipe = Recipes(recipe_id=recipe_id, mealname=name, user_id=current_user.id)
         db.session.add(newrecipe)
+        for ingredient in recipe['extendedIngredients']:
+            newitem = ShoppingList(user_id=current_user.id, name=ingredient['name'], quantity=str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong'], recipe_name=recipe['title'])
+            db.session.add(newitem)
         db.session.commit()
 
-    response = requests.get(url, params=params)
-
     if response.status_code == 200:
-        recipe = response.json()
         flash("Added to your Recipes!")
         return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
     return "Recipe not found", 404    
