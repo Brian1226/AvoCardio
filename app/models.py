@@ -57,9 +57,9 @@ class ShoppingList(db.Model):
         return f"Item('{self.name}')"
     
 class Recipes(db.Model):
-    recipe_id = db.Column(db.String(255), primary_key=True)
-    mealname = db.Column(db.String(255), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    api_key = db.Column(db.String(16), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self): 
-        return f"Recipes('{self.id}', '{self.user_id}', '{self.mealname}')"
+        return f"Recipes('{self.id}', '{self.api_key}', '{self.user_id}')" #, '{self.mealname}')"
