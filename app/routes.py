@@ -2,12 +2,11 @@ from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
-from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList, Recipes
+from app.models import User, datetime, load_user, unauthorized, ShoppingList, Recipes
 import requests
-import json
 from urllib.parse import unquote
 
-SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
+SPOONACULAR_API_KEY = 'b2f65bc19f3344e08f45d09027dc76c1'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
@@ -106,7 +105,7 @@ def search_recipes(query):
     params = {
         'apiKey': SPOONACULAR_API_KEY,
         'query': query,
-        'number': 10,
+        'number': 20,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
@@ -127,15 +126,18 @@ def view_Recipe(recipe_id):
         'apiKey': SPOONACULAR_API_KEY,
     }
     
+    response = requests.get(url, params=params)
+    recipe = response.json()
+    
     if form.validate_on_submit():
         newrecipe = Recipes(api_key=recipe_id, user_id=current_user.id)
         db.session.add(newrecipe)
+        for ingredient in recipe['extendedIngredients']:
+            newitem = ShoppingList(user_id=current_user.id, name=ingredient['name'], quantity=str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong'], recipe_name=recipe['title'])
+            db.session.add(newitem)
         db.session.commit()
 
-    response = requests.get(url, params=params)
-
     if response.status_code == 200:
-        recipe = response.json()
         flash("Added to your Recipes!")
         return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
     return "Recipe not found", 404    
@@ -205,7 +207,16 @@ def updateQuan(itemnumber):
     if item.user_id != current_user.id: 
         return redirect(url_for('home'))
     
-    return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css')
+    if request.method == 'POST': 
+        item.name = request.form['name']
+        item.quantity = request.form['quantity']
+        item.recipe_name = request.form['recipe'] 
+        db.session.commit() 
+        return redirect(url_for('shopping'))
+            
+        
+    else: 
+        return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css', item=item)
 
 @app.route('/deleteItem/<int:itemnumber>', methods=["GET", "POST"])
 @login_required
@@ -246,8 +257,6 @@ def calories_burned(WORKOUT_API_KEY, url):
             calories_per_hour = data.get("calories_per_hour", "")
             duration_minutes = data.get("duration_minutes", "")
             total_calories = data.get("total_calories", "")
-            # duration_minutes = float(duration)
-            # total_calories = calories_per_hour * (duration_minutes / 60)
 
             data_list.append ({
                 "name": name,

@@ -3,40 +3,43 @@
 {% block content %}
 <div class="container-sm">
     <div class="text-center my-5 green-font">
-        <h3>Here is your shopping list!</h3>
+        <h3>Shopping List</h3>
     </div>
     <!-- Content area for the shopping cart -->
     <div>
-        {% if shoplist|length < 1 %}
-        <div class="d-flex pb-3 justify-content-center">
-            <a class="btn btn-success" href="{{url_for('addItem')}}">Add an item!</a>
-        </div>
-        <div class="container pb-5">
-            <div class = "card w-50" style = "margin: auto; padding: 10px;">
-                <h4 style="text-align: center">You currently have no items on your list!</h4>
-            </div>
-        {% else %}
-            <div class="d-flex pb-3 justify-content-center">
-                <a class="btn btn-success" href="{{url_for('addItem')}}">Add an item!</a>
-            </div>
-            <div class="container pb-5">
-            <div class="row">
-                {% for item in shoplist %}
-                <div class="col pb-3"> 
-                    <div class="card" style="width: 16rem;">
-                        <h5 class="card-header">{{ item.name }}</h5>
-                        <div class="card-body">
-                            <p class="card-text">Quantity: {{ item.quantity }}</p>
-                            <!-- <a href="{{ url_for('updateQuan', itemnumber=item.item_id) }}" class="btn btn-primary">Update quantity</a> -->
-                            <a href="{{ url_for('deleteItem', itemnumber=item.item_id) }}" class="btn btn-primary">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            </div>
-        {% endif %}
+        {% if shoplist|length < 1 %} <div class="d-flex mb-3 justify-content-center">
+            <a class="btn btn-success" href="{{url_for('addItem')}}">Add item</a>
     </div>
+</div>
+<div class="row mb-5 d-flex justify-content-center">
+    <div class="card col-7 py-2 text-center">
+        <h4>You currently have no items on your list!</h4>
+    </div>
+    {% else %}
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-success" href="{{url_for('addItem')}}">Add item</a>
+    </div>
+
+    <div class="row mb-5 mt-2 g-3">
+        {% for item in shoplist %}
+        <div class="col-md-3 col-sm-12">
+            <div class="card">
+                <h5 class="card-header">{{ item.name }}</h5>
+                <div class="card-body">
+                    <p class="card-text">Quantity: {{ item.quantity }}</p>
+                    {% if item.recipe_name %}
+                    <p class="card-text">Recipe: {{ item.recipe_name }}</p>
+                    {% endif %}
+                    <a href="{{ url_for('updateQuan', itemnumber=item.item_id) }}" class="btn btn-primary">Update</a>
+                    <a href="{{ url_for('deleteItem', itemnumber=item.item_id) }}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+</div>
 </div>
 
 {% endblock %}

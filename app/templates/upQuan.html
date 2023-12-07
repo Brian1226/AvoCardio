@@ -6,7 +6,12 @@
         <h3>Update the quantity of your item</h3>
     </div>
     <!-- Content area for the item -->
-   
+    <form action="/updateQuan/{{item.item_id}}" method="POST"> 
+        <input type="text" name="name" id="content" value="{{item.name}}"> 
+        <input type="text" name="quantity" value="{{item.quantity}}">
+        <input type="text" name="recipe" value="{{item.recipe_name}}"> 
+        <input type="submit" value="Update">
+    </form> 
 </div>
 
 {% endblock %}
