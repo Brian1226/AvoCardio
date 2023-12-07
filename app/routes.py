@@ -2,7 +2,7 @@ from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
-from app.models import User, datetime, load_user, unauthorized, Ingredients, ShoppingList, Recipes
+from app.models import User, datetime, load_user, unauthorized, ShoppingList, Recipes
 import requests
 from urllib.parse import unquote
 
@@ -126,16 +126,19 @@ def view_Recipe(recipe_id):
         'apiKey': SPOONACULAR_API_KEY,
     }
     
+    response = requests.get(url, params=params)
+    recipe = response.json()
+    
     if form.validate_on_submit():
         name = request.form["name"]
-        newrecipe = Recipes(id=recipe_id, mealname=name, user_id=current_user.id)
+        newrecipe = Recipes(recipe_id=recipe_id, mealname=name, user_id=current_user.id)
         db.session.add(newrecipe)
+        for ingredient in recipe['extendedIngredients']:
+            newitem = ShoppingList(user_id=current_user.id, name=ingredient['name'], quantity=str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong'], recipe_name=recipe['title'])
+            db.session.add(newitem)
         db.session.commit()
 
-    response = requests.get(url, params=params)
-
     if response.status_code == 200:
-        recipe = response.json()
         flash("Added to your Recipes!")
         return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
     return "Recipe not found", 404    
@@ -190,7 +193,16 @@ def updateQuan(itemnumber):
     if item.user_id != current_user.id: 
         return redirect(url_for('home'))
     
-    return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css')
+    if request.method == 'POST': 
+        item.name = request.form['name']
+        item.quantity = request.form['quantity']
+        item.recipe_name = request.form['recipe'] 
+        db.session.commit() 
+        return redirect(url_for('shopping'))
+            
+        
+    else: 
+        return render_template("upQuan.html", title = "Update Item Quantity", css_file = 'shopping.css', item=item)
 
 @app.route('/deleteItem/<int:itemnumber>', methods=["GET", "POST"])
 @login_required
