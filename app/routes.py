@@ -161,7 +161,6 @@ def meal():
         }
         response = requests.get(url, params=params)
         if response.status_code == 200:
-            # print("meal api key: " + recipes[i].api_key)
             meals.append(response.json())
     return render_template("meal.html", title = title, css_file = css_file, meals = meals)
 
@@ -183,12 +182,12 @@ def view_meal(meal_id):
 @app.route('/deleteMeal/<int:meal_id>', methods=["GET", "POST"])
 @login_required
 def deleteMeal(meal_id): 
-    print(meal_id) 
-    recipe = Recipes.query.get_or_404(meal_id)
+    # print(meal_id) 
+    recipe = Recipes.query.filter_by(api_key=meal_id, user_id=current_user.id).first()
     if recipe.user_id != current_user.id:  
         flash('You do not have access to that recipe!')
         return redirect(url_for('home'))
-    print("found it")
+    # print("found it")
     db.session.delete(recipe)
     db.session.commit()
     return redirect(url_for('meal'))
