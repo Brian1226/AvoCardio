@@ -1,10 +1,11 @@
+from app import app, db, bcrypt, login_manager, mail
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
 from app.models import User, datetime, load_user, unauthorized, ShoppingList, Recipes
 import requests
 from urllib.parse import unquote
+from flask_mail import Message
 
 SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
@@ -73,6 +74,10 @@ def contact():
     form = contact_form()
     if form.validate_on_submit():
         flash("Thanks for contacting us!")
+        message_subject = f"AvoCardio Email from {form.name.data}"
+        message = Message(message_subject, sender=form.email.data, recipients=['testuseremail2024@gmail.com'])
+        message.body = form.message.data
+        mail.send(message)
         return redirect(url_for("contact"))
     return render_template("contact.html", form=form, title=title, css_file=css_file)
 
