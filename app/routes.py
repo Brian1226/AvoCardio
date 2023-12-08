@@ -1,12 +1,13 @@
+from app import app, db, bcrypt, login_manager, mail
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from app import app, db, bcrypt, login_manager
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
 from app.models import User, datetime, load_user, unauthorized, ShoppingList, Recipes
-import requests
+import requests, string
 from urllib.parse import unquote
+from flask_mail import Message
 
-SPOONACULAR_API_KEY = '8cd8cb6e1a5742a4aae743131cca3f5d'
+SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
@@ -23,10 +24,10 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and email and bcrypt.check_password_hash(user.password, form.password.data): 
             login_user(user)
-            flash(f"Login successful")
+            flash(f"Login successful!")
             return redirect(url_for("home"))
         else: 
-            flash(f"Login failed")
+            flash(f"Login failed!")
             return redirect(url_for("login"))
     return render_template("login.html", form=form)
 
@@ -56,7 +57,7 @@ def signup():
                 date_created=datetime.utcnow())
             db.session.add(user)
             db.session.commit()
-            flash("Sign up successful")
+            flash("Sign up successful!")
             return redirect(url_for("login"))
     return render_template("signup.html", form=form)
 
@@ -72,7 +73,11 @@ def contact():
     css_file = "contact.css"
     form = contact_form()
     if form.validate_on_submit():
-        flash("THANKS FOR CONTACTING US!")
+        flash("Thanks for contacting us!")
+        message_subject = f"AvoCardio Email from {form.name.data}"
+        message = Message(message_subject, sender=form.email.data, recipients=['testuseremail2024@gmail.com'])
+        message.body = form.message.data
+        mail.send(message)
         return redirect(url_for("contact"))
     return render_template("contact.html", form=form, title=title, css_file=css_file)
 
@@ -95,7 +100,7 @@ def getRecipes():
         recipes = search_recipes(query)
         return render_template('recipes.html', title = title, css_file = css_file, recipes=recipes, search_query=query)
 
-    search_query = request.args.get('search-query', '')
+    search_query = request.args.get('search_query', '')
     decoded_search_query = unquote(search_query)
     recipes = search_recipes(decoded_search_query)
     return render_template('recipes.html', title = title, css_file = css_file, recipes=recipes, search_query=decoded_search_query)
@@ -133,12 +138,12 @@ def view_Recipe(recipe_id):
         newrecipe = Recipes(api_key=recipe_id, user_id=current_user.id)
         db.session.add(newrecipe)
         for ingredient in recipe['extendedIngredients']:
-            newitem = ShoppingList(user_id=current_user.id, name=ingredient['name'], quantity=str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong'], recipe_name=recipe['title'])
+            newitem = ShoppingList(user_id=current_user.id, name=string.capwords(ingredient['name']), quantity=string.capwords(str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong']), recipe_name=string.capwords(recipe['title']))
             db.session.add(newitem)
         db.session.commit()
+        flash("Recipe saved!")
 
     if response.status_code == 200:
-        flash("Added to your Recipes!")
         return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
     return "Recipe not found", 404    
 
@@ -237,6 +242,15 @@ def deleteItem(itemnumber):
     if item.user_id != current_user.id: 
         return redirect(url_for('home'))
     db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for('shopping'))
+
+@app.route('/deleteAll')
+@login_required 
+def deleteAll(): 
+    items = ShoppingList.query.filter_by(user_id=current_user.id).all()
+    for item in items: 
+        db.session.delete(item)
     db.session.commit()
     return redirect(url_for('shopping'))
 

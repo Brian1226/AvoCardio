@@ -11,24 +11,23 @@
 {% endfor %}
 
 <!--hero section-->
-<div class="container-lg mb-5">
+<div class="container-lg">
     <div class="row">
         <div class="col-lg-7 py-5 px-5 linen-bg">
             <h1 class="mb-5 green-font">Welcome to Avocardio!</h1>
-            <p>
-                This application is designed to help all people be able to make healthy and nutritious meals based on
-                their own diet
-                or restrictions! Physical health and mental health are so closely tied together that we want to make
-                sure that people
-                can eat healthy!
-            </p>
+            <h5>
+                Whether you want to search for new recipes, plan your meals, create shopping lists, or track calories
+                burned from various workouts, AvoCardio can help you do it all in one app!
+            </h5>
+            <br>
+            <p>Elevate your wellness journey now!</p>
             <br>
             {% if current_user.is_authenticated %}
             {% else %}
-            <a class="signup-btn" href="{{url_for('signup')}}">Sign Up Now</a>
+            <a class="signup-btn" href="{{url_for('signup')}}">Sign Up</a>
             <br>
             <p>Already have an account?</p>
-            <a class="signup-btn" href="{{url_for('login')}}">Log in instead!</a>
+            <a class="signup-btn" href="{{url_for('login')}}">Log In</a>
             {% endif %}
 
         </div>
@@ -40,7 +39,7 @@
 
 
 <!--cards section-->
-<div class="container-sm">
+<div class="container-sm mb-5">
     <div class="text-center my-5 green-font">
         <h2>How we help!</h2>
     </div>
@@ -90,47 +89,6 @@
                         We can provide a plan that suits everyone with minimal effort on your part! Don't let your busy
                         schedule change how healthy you eat!</p>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--articles section-->
-<div class="container-sm mb-5" id="articles-section">
-    <div class="text-center my-5 green-font">
-        <h2>Lorem, ipsum</h2>
-    </div>
-    <div class="card mb-3 card-shadow">
-        <div class="row g-0">
-            <div class="col-lg-4 col-md-6">
-                <img src="{{ url_for('static', filename='/images/healthysnacks.jpg') }}"
-                    alt="healthy food article image" class="img-fluid">
-            </div>
-            <div class="card-body col-lg-8 col-md-6 d-flex flex-column">
-                <h5 class="card-title mb-3 orange-font">Article title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
-                    accusantium
-                    eveniet eos similique cupiditate ut, illum harum sint est voluptatibus magnam reprehenderit
-                    minus? Facilis deserunt iste nisi temporibus perspiciatis deleniti.</p>
-                <a class="card-text mt-auto links">Link here</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="card card-shadow">
-        <div class="row g-0">
-            <div class="col-lg-4 col-md-6">
-                <img src="{{ url_for('static', filename='/images/exercise.jpg') }}" alt="exercise article image"
-                    class="img-fluid">
-            </div>
-            <div class="card-body col-lg-8 col-md-6 d-flex flex-column">
-                <h5 class="card-title mb-3 orange-font">Article title</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Delectus
-                    accusantium
-                    eveniet eos similique cupiditate ut, illum harum sint est voluptatibus magnam reprehenderit
-                    minus? Facilis deserunt iste nisi temporibus perspiciatis deleniti.</p>
-                <a class="card-text mt-auto links">Link here</a>
             </div>
         </div>
     </div>

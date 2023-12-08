@@ -12,9 +12,9 @@
 
 
 <!--contact section-->
-<div class="container-lg mb-5">
+<div class="container-lg">
     <div class="row">
-        <div class="col-lg-6 py-5 px-5 linen-bg">
+        <div class="col-md-6 py-5 px-5 linen-bg">
             <h1 class="hero-header mb-5 green-font">Contact Us</h1>
             <form method="POST">
                 {{ form.hidden_tag() }}
@@ -27,7 +27,7 @@
                 {{ form.submit(class="green-btn") }}
             </form>
         </div>
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <img src="{{ url_for('static', filename='/images/hero-img.jpg') }}" class="img-fluid" alt="hero image">
         </div>
     </div>

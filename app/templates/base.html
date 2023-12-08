@@ -19,7 +19,7 @@
     {% endif %}
 </head>
 
-<body>
+<body class=" d-flex flex-column min-vh-100">
     <!--navbar section-->
     <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
         <div class="container-xl">
@@ -65,7 +65,7 @@
 
 
     <!--footer section-->
-    <div class="container-fluid bg-dark" id="footer-section">
+    <div class="container-fluid bg-dark mt-auto" id="footer-section">
         <div class="text-center py-3">
             <a href="{{ url_for('home') }}">
                 <img src="{{ url_for('static', filename='/images/logo.png') }}" class="logo" alt="AvoCardio logo">

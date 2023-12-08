@@ -2,115 +2,21 @@
 
 {% block content %}
 
-
 <div class="container-sm">
     <div class="text-center my-5 green-font">
         <h3>{{ title }}</h3>
     </div>
-    <head>
-       <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 20px;
-                background-color: #f4f4f4;
-            }
-    
-            .grid-container {
-                display: grid;
-                grid-template-columns: repeat(4, auto); 
-                grid-template-rows: 250px; 
-                gap: 10px;
-            }
-    
-            .grid-item {
-                position: relative;
-                overflow: hidden;
-                border-radius: 8px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
-    
-            .grid-item img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                display: block;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="grid-container">
-            {% for meal in meals %}
-                <div class="grid-item">
-                    <a href="{{ url_for('view_meal', meal_id=meal.id, meal=meal) }}">{{ meal.title }}</a>
-                    <img src="{{ meal.image }}">
-                </div>
-
-            {% endfor %}
-        </div>
-    </body>
-    </div>
-
-{% endblock %}
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <div class="text-center my-5 green-font">
-        <h3>Recipes</h3>
-    </div>
-    <title>Photo Grid</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns with equal width */
-            gap: 10px; /* Gap between photos */
-        }
-
-        .grid-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-    </style>
-</head>
-<body>
-
-<div class="grid-container">
-    <div class="grid-item">
-        <img src="../static/images/tempimages/applepie.jpg" alt="Photo 1">
-    </div>
-
-    <div class="grid-item">
-        <img src="../static/images/tempimages/dumpling.jpg" alt="Photo 2">
-    </div>
-
-    <div class="grid-item">
-        <img src="../static/images/tempimages/steak.jpg" alt="Photo 3">
-    </div>
-
-    <div class="grid-item">
-        <img src="../static/images/tempimages/stew.jpg" alt="Photo 4">
-    </div>
-    <br><br><br>
-
+            <div class="row g-3 mb-5">
+                {% for meal in meals %}
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card p-3">
+                            <p class="text-center"><a class="recipe-link" href="{{ url_for('view_meal', meal_id=meal.id, meal=meal) }}">{{ meal.title }}</a></p>
+                            <img class="card-img img-fluid" src="{{ meal.image }}">
+                            <a class="btn btn-danger my-3" href="{{ url_for('deleteMeal', meal_id=meal.id) }}">Remove from account</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
 </div>
 
-</body>
-</html> -->
+{% endblock %}

@@ -19,26 +19,6 @@
     box-shadow: 0px 0px 10px #6C9E4F;
 }
 
-.signup-btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: #6C9E4F;
-    font-weight: bold;
-    width: 125px;
-    height: 40px;
-    border: 2px solid #6C9E4F;
-    border-radius: 30px;
-}
-
-.signup-btn:hover {
-    color: #FFFFFF;
-    background-color: #6C9E4F;
-    box-shadow: 0px 0px 10px #6C9E4F;
-}
-
 .logout-btn {
     display: flex;
     flex-direction: row;
@@ -59,26 +39,8 @@
     box-shadow: 0px 0px 10px rgb(245, 104, 96);
 }
 
-.recipe-title {
-    font-size: 16px;
-    line-height: 1.2;
-    max-height: 3.6em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-}
-img {
-    display: block;
-    margin: 0 auto;
-    max-width: 200px;
-}
-
 .green-font {
     color: #6C9E4F
-}
-
-.linen-bg {
-    background-color: #F2E6DD;
 }
 
 .links {
@@ -89,6 +51,14 @@ img {
 
 .links:hover {
     color: #6C9E4F;
+    text-decoration: underline;
+}
+
+.recipe-link {
+    text-decoration: none;
+}
+
+.recipe-link:hover {
     text-decoration: underline;
 }
 
