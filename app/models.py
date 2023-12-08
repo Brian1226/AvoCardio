@@ -62,4 +62,4 @@ class Recipes(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self): 
-        return f"Recipes('{self.id}', '{self.api_key}', '{self.user_id}')" #, '{self.mealname}')"
+        return f"Recipes('{self.id}', '{self.api_key}', '{self.user_id}')"

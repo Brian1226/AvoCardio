@@ -6,12 +6,21 @@
         <h3>Update the quantity of your item</h3>
     </div>
     <!-- Content area for the item -->
-    <form action="/updateQuan/{{item.item_id}}" method="POST"> 
-        <input type="text" name="name" id="content" value="{{item.name}}"> 
-        <input type="text" name="quantity" value="{{item.quantity}}">
-        <input type="text" name="recipe" value="{{item.recipe_name}}"> 
-        <input type="submit" value="Update">
-    </form> 
+    <div class="row mb-5 justify-content-around">
+        <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-8 col-11 p-5">
+            <form action="/updateQuan/{{item.item_id}}" method="POST"> 
+                <fieldset>Item Name</fieldset>
+                <input type="text" name="name" id="content" class="col-12 mb-3 p-2" value="{{item.name}}"> 
+                <fieldset>Quantity</fieldset>
+                <input type="text" name="quantity" class="col-12 mb-3 p-2" value="{{item.quantity}}">
+                <fieldset>Recipe Name</fieldset>
+                <input type="text" name="recipe" class="col-12 mb-3 p-2" value="{{item.recipe_name}}"> 
+                <hr>
+                <input type="submit" class="btn btn-primary my-2 w-100 btn-block " value="Update">
+            </form> 
+            <a class="btn btn-danger" href="{{url_for('shopping')}}">Cancel</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
