@@ -3,7 +3,7 @@ from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from app.forms import contact_form, login_form, signup_form, workout_form, shopping_form, meal_form
 from app.models import User, datetime, load_user, unauthorized, ShoppingList, Recipes
-import requests
+import requests, string
 from urllib.parse import unquote
 from flask_mail import Message
 
@@ -138,12 +138,12 @@ def view_Recipe(recipe_id):
         newrecipe = Recipes(api_key=recipe_id, user_id=current_user.id)
         db.session.add(newrecipe)
         for ingredient in recipe['extendedIngredients']:
-            newitem = ShoppingList(user_id=current_user.id, name=ingredient['name'], quantity=str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong'], recipe_name=recipe['title'])
+            newitem = ShoppingList(user_id=current_user.id, name=string.capwords(ingredient['name']), quantity=string.capwords(str(ingredient['measures']['us']['amount'])+ " " + ingredient['measures']['us']['unitLong']), recipe_name=string.capwords(recipe['title']))
             db.session.add(newitem)
         db.session.commit()
+        flash("Recipe saved!")
 
     if response.status_code == 200:
-        flash("Recipe saved!")
         return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
     return "Recipe not found", 404    
 
@@ -179,6 +179,19 @@ def view_meal(meal_id):
         meal = response.json()
         return render_template('view_meal.html', meal=meal)
     return "Recipe not found", 404 
+
+@app.route('/deleteMeal/<int:meal_id>', methods=["GET", "POST"])
+@login_required
+def deleteMeal(meal_id): 
+    print(meal_id) 
+    recipe = Recipes.query.get_or_404(meal_id)
+    if recipe.user_id != current_user.id:  
+        flash('You do not have access to that recipe!')
+        return redirect(url_for('home'))
+    print("found it")
+    db.session.delete(recipe)
+    db.session.commit()
+    return redirect(url_for('meal'))
 
 @app.route('/shopping')
 @login_required
@@ -230,6 +243,15 @@ def deleteItem(itemnumber):
     if item.user_id != current_user.id: 
         return redirect(url_for('home'))
     db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for('shopping'))
+
+@app.route('/deleteAll')
+@login_required 
+def deleteAll(): 
+    items = ShoppingList.query.filter_by(user_id=current_user.id).all()
+    for item in items: 
+        db.session.delete(item)
     db.session.commit()
     return redirect(url_for('shopping'))
 
