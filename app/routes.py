@@ -6,7 +6,7 @@ from app.models import User, datetime, load_user, unauthorized, ShoppingList, Re
 import requests
 from urllib.parse import unquote
 
-SPOONACULAR_API_KEY = 'b2f65bc19f3344e08f45d09027dc76c1'
+SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
@@ -23,10 +23,10 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and email and bcrypt.check_password_hash(user.password, form.password.data): 
             login_user(user)
-            flash(f"Login successful")
+            flash(f"Login successful!")
             return redirect(url_for("home"))
         else: 
-            flash(f"Login failed")
+            flash(f"Login failed!")
             return redirect(url_for("login"))
     return render_template("login.html", form=form)
 
@@ -56,7 +56,7 @@ def signup():
                 date_created=datetime.utcnow())
             db.session.add(user)
             db.session.commit()
-            flash("Sign up successful")
+            flash("Sign up successful!")
             return redirect(url_for("login"))
     return render_template("signup.html", form=form)
 
@@ -72,7 +72,7 @@ def contact():
     css_file = "contact.css"
     form = contact_form()
     if form.validate_on_submit():
-        flash("THANKS FOR CONTACTING US!")
+        flash("Thanks for contacting us!")
         return redirect(url_for("contact"))
     return render_template("contact.html", form=form, title=title, css_file=css_file)
 
@@ -95,7 +95,7 @@ def getRecipes():
         recipes = search_recipes(query)
         return render_template('recipes.html', title = title, css_file = css_file, recipes=recipes, search_query=query)
 
-    search_query = request.args.get('search-query', '')
+    search_query = request.args.get('search_query', '')
     decoded_search_query = unquote(search_query)
     recipes = search_recipes(decoded_search_query)
     return render_template('recipes.html', title = title, css_file = css_file, recipes=recipes, search_query=decoded_search_query)
@@ -138,7 +138,7 @@ def view_Recipe(recipe_id):
         db.session.commit()
 
     if response.status_code == 200:
-        flash("Added to your Recipes!")
+        flash("Recipe saved!")
         return render_template('view_recipe.html', recipe=recipe, search_query=search_query, form=form)
     return "Recipe not found", 404    
 

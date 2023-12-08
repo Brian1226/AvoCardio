@@ -9,11 +9,12 @@
         <form class="mb-3" method="POST">
             <input class="p-2" type="text" name="search_query" placeholder="Search For Recipes">
             <input class="green-btn p-2" type="submit" value="Search">
-            <a href="/recipe" class="">Restart Search</a>
+            <a href="/recipe" class="restart-link">Restart Search</a>
         </form>
 
         {% if recipes%}
         <h4>Results for "{{ search_query }}"</h4>
+        <!--Recipe results-->
         <div class="row">
             {% for recipe in recipes %}
             <div class="col-lg-3 col-md-4 g-3">
@@ -24,7 +25,7 @@
                         <img class="card-img img-fluid" src="{{ recipe.image }}" alt="{{ recipe.title }}">
                         {% endif %}
                     </div>
-                    <a class="mt-auto" href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
+                    <a class="view-link mt-auto" href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
                 </div>
             </div>
             {% endfor %}

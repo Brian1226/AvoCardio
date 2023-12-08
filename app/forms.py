@@ -32,5 +32,4 @@ class shopping_form(FlaskForm):
     submit = SubmitField("Add item")
 
 class meal_form(FlaskForm):
-    # name = StringField("Name your meal:", render_kw={"placeholder": "Meal name"})
     save = SubmitField("Save Recipe")
