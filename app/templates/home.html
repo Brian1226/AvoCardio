@@ -44,7 +44,8 @@
         <h2>How we help!</h2>
     </div>
     <div class="row justify-content-center g-3">
-        <div class="col-md">
+        <!--recipes card-->
+        <div class="col-lg col-md-6">
             <div class="card border card-shadow d-flex flex-column h-100">
                 <div class="card-body">
                     <div class="card-title text-center orange-font">
@@ -52,32 +53,15 @@
                         <img src="{{ url_for('static', filename='/images/recipes-icon.png') }}" alt="recipes icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">This application will provide you the recipes that maximize the most out of
-                        your groceries!
-                        There are no limits to what you can cook with the help of our application! We're looking to help
-                        better serve you!
-                    </p>
+                    <p class="card-text">Discover detailed recipes easily from a large selection. Each recipe provides a
+                        summary with nutrition information, a concise list of ingredients needed, and comprehensive step-by-step
+                        instructions.</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md">
-            <div class="card border card-shadow d-flex flex-column h-100">
-                <div class="card-body">
-                    <div class="card-title text-center orange-font">
-                        <h3>Ingredients</h3>
-                        <img src="{{ url_for('static', filename='/images/ingredients-icon.png') }}"
-                            alt="ingredients icon" class="my-3 card-icon">
-                    </div>
-                    <p class="card-text">Any ingredients you have, we can work with! No matter your budget, no matter
-                        what culture you're from,
-                        our application can and will help you develop healthy eating habits from the resources you have
-                        access to!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md">
+        <!--meal planner card-->
+        <div class="col-lg col-md-6">
             <div class="card border card-shadow d-flex flex-column h-100">
                 <div class="card-body">
                     <div class="card-title text-center orange-font">
@@ -85,9 +69,36 @@
                         <img src="{{ url_for('static', filename='/images/mealplan-icon.png') }}" alt="meal plan icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Don't have time to plan out meals for the week?
-                        We can provide a plan that suits everyone with minimal effort on your part! Don't let your busy
-                        schedule change how healthy you eat!</p>
+                    <p class="card-text">Quickly save your favorite recipes in your meal planner with just one click. While viewing a recipe, click on the "Save Recipe" button to add it into your meal planner.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--shopping list card-->
+        <div class="col-lg col-md-6">
+            <div class="card border card-shadow d-flex flex-column h-100">
+                <div class="card-body">
+                    <div class="card-title text-center orange-font">
+                        <h3>Shopping List</h3>
+                        <img src="{{ url_for('static', filename='/images/shoppinglist-icon.png') }}"
+                            alt="ingredients icon" class="my-3 card-icon">
+                    </div>
+                    <p class="card-text">Once you save a recipe, it will automatically add all the essential ingredients for that recipe into your shopping list effortlessly. Feel free to update the ingredient's name and quantity, and the recipe's name to fit your needs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!--workouts card-->
+        <div class="col-lg col-md-6">
+            <div class="card border card-shadow d-flex flex-column h-100">
+                <div class="card-body">
+                    <div class="card-title text-center orange-font">
+                        <h3>Workouts</h3>
+                        <img src="{{ url_for('static', filename='/images/workouts-icon.png') }}" alt="workouts icon"
+                            class="my-3 card-icon">
+                    </div>
+                    <p class="card-text">Instantly calculate the calories burned during your workouts from various activities based on the duration and your body weight.
+                    </p>
                 </div>
             </div>
         </div>
