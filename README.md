@@ -57,7 +57,7 @@ python3 run.py
 ```
 
 ## Demo
-[Quick demo of the app](/AvoCardio/Demo.mp4)
+[Quick demo of the app](/Demo.mp4)
 
 ## Credits
 
