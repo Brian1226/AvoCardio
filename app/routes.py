@@ -6,9 +6,13 @@ from app.models import User, datetime, load_user, unauthorized, ShoppingList, Re
 import requests, string
 from urllib.parse import unquote
 from flask_mail import Message
+import os
+from dotenv import load_dotenv
 
-SPOONACULAR_API_KEY = 'ba221d0875734adb9e622242c3a0f885'
-WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
+load_dotenv()
+
+SPOONACULAR_API_KEY = os.environ.get('SPOONACULAR_API_KEY')
+WORKOUT_API_KEY = os.environ.get('WORKOUT_API_KEY')
 
 @app.route("/")
 def home():
@@ -35,6 +39,7 @@ def login():
 @login_required
 def logout(): 
     logout_user()
+    flash("Log out successful!")
     return redirect(url_for("home"))
 
 @app.route("/signup", methods=['GET', 'POST'])
