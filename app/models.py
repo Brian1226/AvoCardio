@@ -1,6 +1,5 @@
 from flask import redirect, url_for
 from flask_login import UserMixin
-
 from app import db, login_manager, app
 from datetime import datetime, date
 
