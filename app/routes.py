@@ -15,10 +15,10 @@ SPOONACULAR_API_KEY = os.environ.get('SPOONACULAR_API_KEY')
 WORKOUT_API_KEY = os.environ.get('WORKOUT_API_KEY')
 
 @app.route("/")
-def home():
+def index():
     title = "Home"
     css_file = "base.css"
-    return render_template("home.html", title=title, css_file=css_file)
+    return render_template("index.html", title=title, css_file=css_file)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -29,7 +29,7 @@ def login():
         if user and email and bcrypt.check_password_hash(user.password, form.password.data): 
             login_user(user)
             flash(f"Login successful!")
-            return redirect(url_for("home"))
+            return redirect(url_for("index"))
         else: 
             flash(f"Login failed!")
             return redirect(url_for("login"))
@@ -40,7 +40,7 @@ def login():
 def logout(): 
     logout_user()
     flash("Log out successful!")
-    return redirect(url_for("home"))
+    return redirect(url_for("index"))
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -184,12 +184,10 @@ def view_meal(meal_id):
 @app.route('/deleteMeal/<int:meal_id>', methods=["GET", "POST"])
 @login_required
 def deleteMeal(meal_id): 
-    # print(meal_id) 
     recipe = Recipes.query.filter_by(api_key=meal_id, user_id=current_user.id).first()
     if recipe.user_id != current_user.id:  
         flash('You do not have access to that recipe!')
-        return redirect(url_for('home'))
-    # print("found it")
+        return redirect(url_for('index'))
     db.session.delete(recipe)
     db.session.commit()
     return redirect(url_for('meal'))
@@ -224,7 +222,7 @@ def addItem():
 def updateQuan(itemnumber): 
     item = ShoppingList.query.get_or_404(itemnumber) 
     if item.user_id != current_user.id: 
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     
     if request.method == 'POST': 
         item.name = request.form['name']
@@ -242,7 +240,7 @@ def updateQuan(itemnumber):
 def deleteItem(itemnumber): 
     item = ShoppingList.query.get_or_404(itemnumber)
     if item.user_id != current_user.id: 
-        return redirect(url_for('home'))
+        return redirect(url_for('index'))
     db.session.delete(item)
     db.session.commit()
     return redirect(url_for('shopping'))
