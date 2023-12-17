@@ -25,11 +25,11 @@
                     <div class="card-body">
 
                         <!--Link to go back to search-->
-                        <a class="back-link" href="{{ url_for('getRecipes') }}">Back to Search</a>
+                        <a class="link" href="{{ url_for('getRecipes') }}">Back to Search</a>
                         <br>
 
                         <!--Recipe Title-->
-                        <h1 class="text-center mt-2">{{ recipe.title }}</h1>
+                        <h1 class="text-center green-font mt-2">{{ recipe.title }}</h1>
 
                         <!--Recipe Image-->
                         {% if recipe.image %}
@@ -37,6 +37,7 @@
                         {% endif %}
 
                         <!--Extra info Section-->
+                        <p class="text-center mb-0">Source: <a class="link" href="{{ recipe.sourceUrl }}">{{ recipe.sourceUrl }}</a></p>
                         <p class="text-center mb-0">Servings: {{ recipe.servings }} </p>
                         <p class="text-center">Ready Time: {{ recipe.readyInMinutes }} mins</p>
 
@@ -50,7 +51,7 @@
                         </div>
 
                         <!--Summary Section-->
-                        <h2>Summary</h2>
+                        <h2 class="orange-font">Summary</h2>
                         {% if recipe.summary %}
                         <p>{{ recipe.summary|striptags }}</p>
                         {% else %}
@@ -58,7 +59,7 @@
                         {% endif %}
 
                         <!--Ingredients Section-->
-                        <h2>Ingredients</h2>
+                        <h2 class="orange-font">Ingredients</h2>
                         <ul>
                             {% if recipe.extendedIngredients %}
                             {% for ingredient in recipe.extendedIngredients %}
@@ -70,7 +71,7 @@
                         </ul>
 
                         <!--Instructions Section-->
-                        <h2>Instructions</h2>
+                        <h2 class="orange-font">Instructions</h2>
                         <ol>
                             {% if recipe.analyzedInstructions %}
                             {% for instructions in recipe.analyzedInstructions %}

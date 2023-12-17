@@ -63,6 +63,10 @@
     color: #6C9E4F
 }
 
+.orange-font {
+    color: #D77456;
+}
+
 .links {
     color: #FFFFFF;
     text-decoration: none;
@@ -72,6 +76,14 @@
 .links:hover {
     color: #6C9E4F;
     text-decoration: underline;
+}
+
+.linen-bg {
+    background-color: #F2E6DD;
+}
+
+.box-shadow {
+    box-shadow: 20px 20px #D77456;
 }
 
 .gradient-bg {

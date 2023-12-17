@@ -8,16 +8,16 @@
     <!-- Content area for the shopping cart -->
     <div>
         {% if shoplist|length < 1 %} <div class="d-flex mb-3 justify-content-center">
-            <a class="btn btn-success" href="{{url_for('addItem')}}">Add item</a>
+            <a class="btn btn-success" href="{{url_for('addItem')}}">Add Item</a>
     </div>
 </div>
 <div class="row mb-5 d-flex justify-content-center">
-    <div class="card col-7 py-2 text-center">
-        <h4>You currently have no items on your list!</h4>
+    <div class="col-7 py-2 text-center">
+        <p>You currently have no items in your list!</p>
     </div>
     {% else %}
     <div class="d-flex justify-content-center">
-        <a class="btn btn-success mx-2" href="{{url_for('addItem')}}">Add item</a>
+        <a class="btn btn-success mx-2" href="{{url_for('addItem')}}">Add Item</a>
         <a class="btn btn-danger mx-2" href="{{url_for('deleteAll')}}">Delete all</a>
     </div>
 

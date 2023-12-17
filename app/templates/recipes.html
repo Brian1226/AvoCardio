@@ -13,20 +13,20 @@
         </form>
 
         {% if recipes%}
-        <h4>Results for "{{ search_query }}"</h4>
+        <h4>Results for <span class="orange-font">"{{ search_query }}"</span></h4>
+        <p>Click on a recipe to view it</p>
         <!--Recipe results-->
         <div class="row">
             {% for recipe in recipes %}
             <div class="col-lg-3 col-md-4 g-3">
-                <div class="card d-flex flex-column h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ recipe.title }}</h5>
+                <a href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}" style="text-decoration: none;">
+                    <div class="card p-3 d-flex flex-column h-100">
+                        <h5>{{ recipe.title }}</h5>
                         {% if recipe.image %}
                         <img class="card-img img-fluid" src="{{ recipe.image }}" alt="{{ recipe.title }}">
                         {% endif %}
                     </div>
-                    <a class="view-link mt-auto" href="{{ url_for('view_Recipe', recipe_id=recipe.id, search_query=search_query) }}">View</a>
-                </div>
+                </a>
             </div>
             {% endfor %}
         </div>

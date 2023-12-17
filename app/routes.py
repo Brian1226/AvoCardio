@@ -7,7 +7,7 @@ import requests, string
 from urllib.parse import unquote
 from flask_mail import Message
 
-SPOONACULAR_API_KEY = 'f1c49d83ef6041bb920c6a2d10c70ee8'
+SPOONACULAR_API_KEY = 'ba221d0875734adb9e622242c3a0f885'
 WORKOUT_API_KEY = "TPX1b3+XQpDjzWCQFqt8iQ==JGmx4LEDsN1puAQh"
 
 @app.route("/")
@@ -86,9 +86,6 @@ def contact():
 def recipes():
     title = "Recipes"
     css_file = "recipes.css"
-    # user = User.query.filter_by(username=current_user.username().first())
-    # user = current_user
-    # ingredients = Ingredients.query.filter_by(user_id = user.id).all()
     return render_template("recipes.html", title = title, css_file = css_file, recipes=[], search_query='')
 
 @app.route("/recipe", methods=['GET', 'POST'])
