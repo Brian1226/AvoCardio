@@ -16,7 +16,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'testuseremail2024@gmail.com'
-app.config['MAIL_PASSWORD'] = 'ovvp rmhh svay nvkw'
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 mail = Mail(app)
 
 login_manager  = LoginManager(app)
