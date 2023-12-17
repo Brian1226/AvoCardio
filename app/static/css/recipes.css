@@ -41,6 +41,10 @@
     color: #6C9E4F
 }
 
+.orange-font {
+    color: #D77456;
+}
+
 .links {
     color: #FFFFFF;
     text-decoration: none;
@@ -60,12 +64,12 @@
     text-decoration: underline;
 }
 
-.view-link {
-    text-decoration: none;
+.card {
+    color: black;
 }
 
-.view-link:hover {
-    text-decoration: underline;
+.card:hover {
+    box-shadow: 5px 5px 20px;
 }
 
 #footer-section hr {

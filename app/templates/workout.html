@@ -24,10 +24,10 @@
             {% if result %}
             <div class="card col-xl-4 col-lg-5 col-md-6 col-sm-10 p-5">
                 {% for data in result %}
-                <p> Activity: {{ data.name }} </p>
-                <p> Calories burned per hour: {{ data.calories_per_hour }} </p>
-                <p> Duration (mins): {{ data.duration_minutes }} </p>
-                <p> Total calories burned: {{ data.total_calories }} </p>
+                <p><span style="font-weight: bold;">Activity:</span> {{ data.name }} </p>
+                <p><span style="font-weight: bold;">Calories burned per hour:</span> {{ data.calories_per_hour }} </p>
+                <p><span style="font-weight: bold;">Duration (mins):</span> {{ data.duration_minutes }} </p>
+                <p><span style="font-weight: bold;">Total calories burned:</span> {{ data.total_calories }} </p>
                 <hr>
                 {% endfor %}
             </div>

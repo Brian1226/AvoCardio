@@ -1,6 +1,5 @@
 from flask import redirect, url_for
 from flask_login import UserMixin
-# from itsdangerous import TimedJSONWebSignatureSerializer as Serializer 
 
 from app import db, login_manager, app
 from datetime import datetime, date
@@ -35,11 +34,6 @@ class User(db.Model, UserMixin):
             f': {self.username} ' \
             f': {self.email} ' \
             f': {self.data_created.strftime("%d/%m/%Y, %H:%M:%S")}'
-    
-class Ingredients(db.Model): 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    name = db.Column(db.String(255), nullable = False, primary_key=True)
-    amount = db.Column(db.Integer, nullable = False) 
 
     def __repr__(self): 
         return f"Ingredient('{self.name}', '{self.amount}', '{self.user_id}')"

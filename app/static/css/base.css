@@ -59,6 +59,19 @@
     box-shadow: 0px 0px 10px #6C9E4F;
 }
 
+#hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+#hero-section h3 {
+    font-weight: bold;
+}
+
+#hero-section p {
+    font-size: 1.1rem;
+}
+
 .green-font {
     color: #6C9E4F
 }
@@ -76,7 +89,7 @@
 }
 
 .card-shadow {
-    box-shadow: 3px 3px 10px 1px #000000;
+    box-shadow: 5px 5px 20px;
 }
 
 .links {

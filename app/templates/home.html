@@ -11,25 +11,22 @@
 {% endfor %}
 
 <!--hero section-->
-<div class="container-lg">
+<div class="container-lg" id="hero-section">
     <div class="row">
         <div class="col-lg-7 py-5 px-5 linen-bg">
-            <h1 class="mb-5 green-font">Welcome to Avocardio!</h1>
-            <h5>
-                Whether you want to search for new recipes, plan your meals, create shopping lists, or track calories
-                burned from various workouts, AvoCardio can help you do it all in one app!
-            </h5>
-            <br>
-            <p>Elevate your wellness journey now!</p>
-            <br>
+            <h3>AvoCardio<span class="green-font">.</span></h3>
+            <h1 class="my-5 green-font">Elevate your wellness journey now!</h1>
+            <p>
+                Discover new recipes, plan your meals, create shopping lists, and track calories
+                burned from various workouts - AvoCardio offers an all-in-one solution for all your health and fitness needs!
+            </p>
             {% if current_user.is_authenticated %}
             {% else %}
-            <a class="signup-btn" href="{{url_for('signup')}}">Sign Up</a>
-            <br>
-            <p>Already have an account?</p>
-            <a class="signup-btn" href="{{url_for('login')}}">Log In</a>
+            <div class="row mt-5">
+                <a class="signup-btn me-3" href="{{url_for('signup')}}">Sign Up</a>
+                <a class="signup-btn" href="{{url_for('login')}}">Log In</a>
+            </div>
             {% endif %}
-
         </div>
         <div class="col-lg-5">
             <img src="{{ url_for('static', filename='/images/hero-img.jpg') }}" class="img-fluid" alt="hero image">
@@ -41,12 +38,12 @@
 <!--cards section-->
 <div class="container-sm mb-5">
     <div class="text-center my-5 green-font">
-        <h2>How we help!</h2>
+        <h2>Explore our Features</h2>
     </div>
     <div class="row justify-content-center g-3">
         <!--recipes card-->
         <div class="col-lg col-md-6">
-            <div class="card border card-shadow d-flex flex-column h-100">
+            <div class="card card-shadow d-flex flex-column h-100">
                 <div class="card-body">
                     <div class="card-title text-center orange-font">
                         <h3>Recipes</h3>
@@ -54,7 +51,8 @@
                             class="my-3 card-icon">
                     </div>
                     <p class="card-text">Discover detailed recipes easily from a large selection. Each recipe provides a
-                        summary with nutrition information, a concise list of ingredients needed, and comprehensive step-by-step
+                        summary with nutrition information, a concise list of ingredients needed, and comprehensive
+                        step-by-step
                         instructions.</p>
                 </div>
             </div>
@@ -62,42 +60,46 @@
 
         <!--meal planner card-->
         <div class="col-lg col-md-6">
-            <div class="card border card-shadow d-flex flex-column h-100">
+            <div class="card card-shadow d-flex flex-column h-100">
                 <div class="card-body">
                     <div class="card-title text-center orange-font">
                         <h3>Meal Planner</h3>
                         <img src="{{ url_for('static', filename='/images/mealplan-icon.png') }}" alt="meal plan icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Quickly save your favorite recipes in your meal planner with just one click. While viewing a recipe, click on the "Save Recipe" button to add it into your meal planner.</p>
+                    <p class="card-text">Quickly save your favorite recipes in your meal planner with just one click.
+                        While viewing a recipe, click on the "Save Recipe" button to add it into your meal planner.</p>
                 </div>
             </div>
         </div>
 
         <!--shopping list card-->
         <div class="col-lg col-md-6">
-            <div class="card border card-shadow d-flex flex-column h-100">
+            <div class="card card-shadow d-flex flex-column h-100">
                 <div class="card-body">
                     <div class="card-title text-center orange-font">
                         <h3>Shopping List</h3>
                         <img src="{{ url_for('static', filename='/images/shoppinglist-icon.png') }}"
-                            alt="ingredients icon" class="my-3 card-icon">
+                            alt="shopping list icon" class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Once you save a recipe, it will automatically add all the essential ingredients for that recipe into your shopping list effortlessly. Feel free to update the ingredient's name and quantity, and the recipe's name to fit your needs.</p>
+                    <p class="card-text">Once you save a recipe, it will automatically add all the essential ingredients
+                        for that recipe into your shopping list effortlessly. Feel free to update the ingredient's name
+                        and quantity, and the recipe's name to fit your needs.</p>
                 </div>
             </div>
         </div>
 
         <!--workouts card-->
         <div class="col-lg col-md-6">
-            <div class="card border card-shadow d-flex flex-column h-100">
+            <div class="card card-shadow d-flex flex-column h-100">
                 <div class="card-body">
                     <div class="card-title text-center orange-font">
                         <h3>Workouts</h3>
                         <img src="{{ url_for('static', filename='/images/workouts-icon.png') }}" alt="workouts icon"
                             class="my-3 card-icon">
                     </div>
-                    <p class="card-text">Instantly calculate the calories burned during your workouts from various activities based on the duration and your body weight.
+                    <p class="card-text">Instantly calculate the calories burned during your workouts from various
+                        activities based on the duration and your body weight.
                     </p>
                 </div>
             </div>
