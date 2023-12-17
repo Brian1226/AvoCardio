@@ -24,7 +24,7 @@
     <div class="container-fluid">
         <div class="row d-flex justify-content-center align-items-center vh-100">
             <div class="card card-shadow col-xl-4 col-lg-5 col-md-6 col-sm-8 py-5 px-5">
-                <a href="{{ url_for('home')}}">
+                <a href="{{ url_for('index')}}">
                     <img src="{{ url_for('static', filename='/images/logo.png') }}"
                         class="card-img-top logo d-block mx-auto mb-4" alt="AvoCardio logo">
                 </a>
@@ -41,7 +41,7 @@
                     <hr>
                 </form>
                 <p>Already have an account? <a href="{{ url_for('login') }}" class="link my-2">Click Here</a></p>
-                <a class='btn btn-outline-primary' href="{{ url_for('home') }}">Back to Home</a>
+                <a class='btn btn-outline-primary' href="{{ url_for('index') }}">Back to Home</a>
             </div>
         </div>
     </div>
