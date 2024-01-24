@@ -112,7 +112,7 @@ def search_recipes(query):
     params = {
         'apiKey': SPOONACULAR_API_KEY,
         'query': query,
-        'number': 40,
+        'number': 60,
         'instructionsRequired': True,
         'addRecipeInformation': True,
         'fillIngredients': True,
